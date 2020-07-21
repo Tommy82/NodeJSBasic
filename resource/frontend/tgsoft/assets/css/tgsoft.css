@@ -1,0 +1,153 @@
+/** Begin: Globals - Complete Form **/
+body, form, figure {
+    _margin: 0;
+    _padding: 0;
+}
+
+
+/** End: Globals - Complete Form **/
+
+/** Begin: Globals: Header **/
+#header {
+    height: 2em;
+    width: 100%;
+    top: 0;
+}
+/** End: Globals: Header **/
+
+/** Begin: Globals - Footer **/
+#footer {
+    height: 1em;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+/** End: Globals - Footer **/
+
+#main {
+}
+
+
+
+
+#content {
+}
+
+/** Begin: Navigation Menu */
+nav {
+    box-sizing: border-box;
+    float: left;
+    width: 100%;
+    background: #3a3a3a;
+    font-size: 16px;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li {
+    position: relative;
+    float: left;
+    list-style: none;
+}
+
+nav ul li:hover {
+    background: #4096ee;
+}
+
+nav ul li a {
+    padding: 20px;
+}
+
+nav ul ul {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    background: #333;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+}
+
+nav ul ul li {
+    float: none;
+    width: 200px;
+    border-bottom: 1px solid #555;
+}
+
+nav ul ul li a {
+    padding: 10px 20px;
+}
+
+nav ul li:hover > ul {
+    top: 100%;
+    left: 0;
+}
+
+nav ul ul li:hover > ul {
+    top: 0;
+    left: 200px;
+}
+
+nav ul li.submenu > a:after {
+    position: relative;
+    float: right;
+    content: '';
+    margin-left: 10px;
+    margin-top: 5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #fff;
+    border-bottom: 5px solid transparent;
+}
+
+nav ul ul li.submenu a:after {
+    margin-left: auto;
+    margin-right: -10px;
+    border-left: 5px solid #fff;
+    border-right: 5px solid transparent;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+nav ul ul li:last-child {
+    border-bottom: none;
+}
+/** End: Navigation Menu */
+
+/** Begin: Default Style 1 **/
+input.default_style1 {
+    height: 1.5em;
+    width: 20em;
+    padding: 0.4em;
+    border: 0.1em solid RGB(150,150,150);
+    border-radius: 0.5em;
+}
+select.default_style1,
+button.default_style1 {
+    height: 2.4em;
+    width: 21em;
+    padding: 0.4em;
+    border: 0.1em solid RGB(150,150,150);
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+label.default_style1 {
+    color: RGB(0,0,0);
+    font-size: 1em;
+}
+input.default_style1:hover,
+select.default_style1:hover,
+button.default_style1:hover {
+    border-color: RGB(0,0,0);
+    border-radius: 1em;
+}
+/** End: Default Style 1 **/

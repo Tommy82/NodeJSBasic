@@ -1,11 +1,60 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}Mediadeal GmbH{% endblock %}</title>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ title }}</title>
+
+        {% block stylesheet_extern %}
+            <link rel="stylesheet" type="text/css" href="/vendor/jquery/jquery-ui/jquery-ui.min.css">
+            <link rel="stylesheet" type="text/css" href="/vendor/jquery/jquery-tablesorter/css/theme.default.css">
+            <link rel="stylesheet" type="text/css" href="/vendor/toastr/toastr.min.css">
+        {% endblock %}
+
+        {% block stylesheet %}
+            <link rel="stylesheet" type="text/css" href="/tgsoft/assets/css/tgsoft.css">
+        {% endblock %}
+    {% endblock %}
 </head>
 <body>
-    {% block content %}{% endblock %}
+<div id="wrapper">
+    <div id="header">
+        {% block mainmenu %}
+            <nav class="mainmenu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    {% block nav_beforebasic %}{% endblock %}
+                    <li class="submenu"><a href="#">Basics</a>
+                        <ul>
+                            {% block nav_basic_before %}{% endblock %}
+                            <li><a href="/backend/users">Users</a></li>
+                            {% block nav_basic_after %}{% endblock %}
+                        </ul>
+                    </li>
+                    {% block nav_afterbasic %}{% endblock %}
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
+        {% endblock %}
+        {% block header %}{% endblock %}
+    </div>
+    <div id="main">
+        <div id="content">{% block content %}{% endblock %}</div>
+    </div>
+    <div id="footer">{% block footer %}{% endblock %}</div>
+</div>
+
+{% block javascript_extern %}
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/jquery/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/vendor/jquery/jquery-tablesorter/js/jquery.tablesorter.min.js"></script>
+    <script src="/vendor/jquery/jquery-tablesorter/js/jquery.tablesorter.widgets.min.js"></script>
+    <script src="/vendor/toastr/toastr.min.js"></script>
+{% endblock %}
+
+{% block javascript %}
+    <script src="/tgsoft/assets/js/tgsoft.js"></script>
+{% endblock %}
 </body>
 </html>

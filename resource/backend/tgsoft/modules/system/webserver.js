@@ -16,7 +16,6 @@ import express from 'express';
 import { default as session  } from 'express-session';
 import flash from 'express-flash';
 import methodOverride from 'method-override';
-import path from 'path';
 import Twig from 'twig';
 
 /** WebServer Class **/
@@ -36,7 +35,7 @@ export default class WebServer {
                 this.app.set('twig options', {});                                       // ... set Twig Options
             }
             this.app.set('view options', { layout: false});                                     // Set View Options
-            this.app.use(express.static(path.join(directories.root, 'frontend', 'public')));    // Set Frontend Static Directory ( needed for "include files" like 'js', 'css', 'png' ...)
+            this.app.use(express.static(directories.frontend));    // Set Frontend Static Directory ( needed for "include files" like 'js', 'css', 'png' ...)
             this.app.use(express.urlencoded({ extended: false }));                              // Set Url Encoding
             this.app.use(flash());                                                              // Include Flash to set direct Messages on HTML Form
             this.app.use(session({                                                      // Set WebServer Session
