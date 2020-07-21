@@ -1,0 +1,63 @@
+export default class DateTime {
+    static getCurrentDateTime = getCurrentDateTime;
+    static toRealString = toRealString;
+    static toRealUTCString = toRealUTCString;
+}
+
+/**
+ * get the current DateTime and UTC-DateTime
+ * @return {{utcMonth: number, utcMinutes: number, year: number, minutes: number, utcYear: number, utcDay: number, seconds: number, month: number, hour: number, utcSeconds: number, utcMilliSeconds: number, day: number, utcHours: number, milliSeconds: number}}
+ */
+export function getCurrentDateTime() {
+    let date_ob = new Date();
+
+    return {
+        year: date_ob.getFullYear(),
+        month: date_ob.getMonth(),
+        day: date_ob.getDay(),
+        hour: date_ob.getHours(),
+        minutes: date_ob.getMinutes(),
+        seconds: date_ob.getSeconds(),
+        milliSeconds: date_ob.getMilliseconds(),
+
+        utcYear: date_ob.getUTCFullYear(),
+        utcMonth: date_ob.getUTCMonth(),
+        utcDay: date_ob.getUTCDate(),
+        utcHours: date_ob.getUTCHours(),
+        utcMinutes: date_ob.getUTCMinutes(),
+        utcSeconds: date_ob.getUTCSeconds(),
+        utcMilliSeconds: date_ob.getUTCMilliseconds(),
+
+        realString: toRealString(date_ob),
+        realUTCString: toRealUTCString(date_ob),
+
+        toDateString: date_ob.toDateString,
+        toISOString: date_ob.toISOString,
+        toLocaleDateString: date_ob.toLocaleDateString,
+        toLocaleString: date_ob.toLocaleString,
+        toLocaleTimeString: date_ob.toLocaleTimeString,
+        toString: date_ob.toString,
+        toTimeString: date_ob.toTimeString,
+        toUTCString: date_ob.toUTCString,
+    }
+}
+
+export function toRealString(date_ob) {
+    let date = ("0" + date_ob.getDate()).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    let hours = date_ob.getHours();
+    let minutes = date_ob.getMinutes();
+    let seconds = date_ob.getSeconds();
+    return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+}
+
+export function toRealUTCString(date_ob) {
+    let date = ("0" + date_ob.getUTCDate()).slice(-2);
+    let month = ("0" + (date_ob.getUTCMonth() + 1)).slice(-2);
+    let year = date_ob.getUTCFullYear();
+    let hours = date_ob.getUTCHours();
+    let minutes = date_ob.getUTCMinutes();
+    let seconds = date_ob.getUTCSeconds();
+    return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds + "Z";
+}

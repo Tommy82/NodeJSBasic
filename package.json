@@ -1,0 +1,30 @@
+{
+  "name": "nodejsbasic",
+  "version": "1.0.0",
+  "description": "NodeJS Basic with Webserver",
+  "main": "startup.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tommy82/NodeJSBasic.git"
+  },
+  "author": "Thomas Göttsching",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tommy82/NodeJSBasic/issues"
+  },
+  "homepage": "https://github.com/Tommy82/NodeJSBasic#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.1",
+    "method-override": "^3.0.0",
+    "mysql": "^2.18.1",
+    "twig": "^1.15.1",
+    "typeorm": "^0.2.25"
+  }
+}
