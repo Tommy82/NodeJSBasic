@@ -14,3 +14,13 @@ TGSoft.webServer.app.post('/backend/login', TGSoft.webServer.passport.authentica
     failureRedirect: '/backend/login?error=1',
     failureFlash: true
 }))
+
+TGSoft.webServer.app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+});
+
+TGSoft.webServer.app.get('/backend/logout', function(req, res) {
+    req.logout();
+    res.redirect('/backend');
+})
