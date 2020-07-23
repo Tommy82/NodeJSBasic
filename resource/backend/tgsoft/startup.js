@@ -2,8 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { TGSoft } from './modules/tgsoft/tgsoft.js'
 
-
-
 async function loadFiles(fileName) {
     return new Promise(async (resolve, reject) => {
         try {

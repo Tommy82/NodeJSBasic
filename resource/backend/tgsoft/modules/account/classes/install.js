@@ -3,6 +3,7 @@ import { accounts } from "../database/entities.js";
 
 import { default as Account } from '../classes/account.js';
 import * as fDatabase from '../database/functions.js';
+import * as fSecurity from '../functions/security.js';
 import { settings } from '../../../../../configuration/settings.js';
 
 class AccountInstall {
@@ -29,6 +30,11 @@ class AccountInstall {
 
         }
     }
+
+    async start() {
+    }
 }
 
 TGSoft.addModule(new AccountInstall());
+
+fSecurity.passport_initialize();

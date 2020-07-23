@@ -10,6 +10,9 @@ export default class Account {
 
     save = fDatabase.save;
     updatePassword = fFunctions.updatePassword;
+
+    static getById = fDatabase.getById;
+    static getByUsername = fDatabase.getByUsername;
 }
 
 

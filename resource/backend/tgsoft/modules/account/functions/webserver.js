@@ -2,17 +2,15 @@ import { TGSoft} from "../../tgsoft/tgsoft.js";
 import path from 'path';
 import fs from 'fs';
 
-TGSoft.webServer.app.get('/', (req, res) => {
-    res.redirect('/login');
-})
-
-TGSoft.webServer.app.get('/login', (req, res) => {
+TGSoft.webServer.app.get('/backend/login', TGSoft.webServer.checkNotAuthenticated_Backend, (req, res) => {
     let fileName = path.join(TGSoft.directories.frontend, 'tgsoft', 'modules', 'accounts', 'login.twig');
     let altFileName = path.join(TGSoft.directories.frontend, 'tgsoft', 'modules', 'accounts', 'login.twig');
-    if ( fs.existsSync(altFileName) ) { toOutput(req, res, altFileName, {}); }
-    else { toOutput(req, res, fileName, {}) }
-})
+    if ( fs.existsSync(altFileName) ) { res.render(altFileName, {}); }
+    else { res.render(fileName, {}) }
+});
 
-function toOutput(req, res, fileName, params) {
-    res.render(fileName, params)
-}
+TGSoft.webServer.app.post('/backend/login', TGSoft.webServer.passport.authenticate('local', {
+    successRedirect: '/backend',
+    failureRedirect: '/backend/login?error=1',
+    failureFlash: true
+}))

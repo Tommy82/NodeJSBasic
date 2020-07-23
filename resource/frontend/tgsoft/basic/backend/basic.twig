@@ -20,7 +20,7 @@
 <body>
 <div id="wrapper">
     <div id="header">
-        {% block mainmenu %}
+        {% block navigation_main %}
             <nav class="mainmenu">
                 <ul>
                     <li><a href="/">Home</a></li>
@@ -33,7 +33,7 @@
                         </ul>
                     </li>
                     {% block nav_afterbasic %}{% endblock %}
-                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="/backend/logout">Logout</a></li>
                 </ul>
             </nav>
         {% endblock %}

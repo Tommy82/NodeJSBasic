@@ -1,9 +1,22 @@
 /** Begin: Globals - Complete Form **/
 body, form, figure {
-    _margin: 0;
-    _padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
+h1 { color: #0a0a0a; }
+
+#errormessage { color: red; }
+
+h1 { color: #0a0a0a; }
+
+#errormessage { color: red; }
+
+#main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 /** End: Globals - Complete Form **/
 
