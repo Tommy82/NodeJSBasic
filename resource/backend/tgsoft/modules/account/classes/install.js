@@ -31,8 +31,7 @@ class AccountInstall {
         }
     }
 
-    async start() {
-    }
+    async start() { }
 }
 
 TGSoft.addModule(new AccountInstall());
