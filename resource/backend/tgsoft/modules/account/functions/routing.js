@@ -19,4 +19,4 @@ TGSoft.webServer.app.get('/backend/logout', function(req, res) {
     res.redirect('/backend');
 })
 
-TGSoft.webServer.app.get('/backend/users', /* TGSoft.webServer.checkNotAuthenticated_Backend, */(req, res) => { fWebServer.toOutput(req, res,'list.twig') })
+TGSoft.webServer.app.get('/backend/users', /* TGSoft.webServer.checkNotAuthenticated_Backend, */fWebServer.userList );

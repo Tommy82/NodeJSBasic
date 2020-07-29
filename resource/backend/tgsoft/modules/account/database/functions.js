@@ -52,6 +52,17 @@ export async function getAllActive(toClass = false) {
     })
 }
 
+export async function getAll(toClass = false) {
+    return new Promise((resolve, reject) => {
+        TGSoft.database.findAll('accounts')
+            .catch(err => { return reject(err); })
+            .then(lstAcc => {
+                if ( !toClass ) { return resolve(lstAcc); }
+                else { return resolve(createClassListFromDB(lstAcc))}
+            });
+    })
+}
+
 /**
  * Convert the Database-Record to Account-Class
  * @param {object} record DB:accounts

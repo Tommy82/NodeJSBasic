@@ -1,0 +1,36 @@
+{% extends '/tgsoft/basic/backend/basic.twig' %}
+
+{% block navigation_main %}{{ parent() }}{% endblock %}
+
+{% block content %}
+    <table id="tblAccounts" class="tblsorter">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Active</th>
+            <th>Options</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% if lstAccounts and lstAccounts.length > 0 %}
+                {% for acc in lstAccounts %}
+                    <tr>
+                        <td>{{ acc.id }}</td>
+                        <td>{{ acc.userName }}</td>
+                        <td>{{ acc.roleType }}</td>
+                        <td>{{ acc.active }}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="/tgsoft/assets/css/accounts.css">
+{% endblock %}

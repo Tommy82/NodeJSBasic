@@ -1,4 +1,11 @@
 
+#main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 #form_login .loginRow { display: flex; margin-bottom: 0.5em;}
 #form_login .loginRow .col1 { flex: 0 0 25%; }
 #form_login .loginRow .col2 { flex: 1; }
