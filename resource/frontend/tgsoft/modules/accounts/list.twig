@@ -21,7 +21,9 @@
                         <td>{{ acc.userName }}</td>
                         <td>{{ acc.roleType }}</td>
                         <td>{{ acc.active }}</td>
-                        <td></td>
+                        <td><span class="options">
+                                <input type="button" class="btnChange">
+                            </span></td>
                     </tr>
                 {% endfor %}
             {% endif %}
@@ -32,5 +34,5 @@
 
 {% block stylesheet %}
     {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="/tgsoft/assets/css/accounts.css">
+    <link rel="stylesheet" type="text/css" href="/tgsoft/modules/accounts/assets/accounts.css">
 {% endblock %}
