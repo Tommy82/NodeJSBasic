@@ -4,6 +4,7 @@
     {% block head %}
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="/tgsoft/basic/assets/favicon.ico">
         <title>{{ title }}</title>
 
         {% block stylesheet_extern %}
@@ -29,6 +30,7 @@
                         <ul>
                             {% block nav_basic_before %}{% endblock %}
                             <li><a href="/backend/users">Users</a></li>
+                            <li><a href="/backend/roles">Rollen</a></li>
                             {% block nav_basic_after %}{% endblock %}
                         </ul>
                     </li>

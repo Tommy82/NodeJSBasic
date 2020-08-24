@@ -22,7 +22,7 @@
                         <td>{{ acc.roleType }}</td>
                         <td>{{ acc.active }}</td>
                         <td><span class="options">
-                                <input type="button" class="btnChange">
+                                <input type="button" class="btnChange" value="Change" accountId="{{ acc.id }}">
                             </span></td>
                     </tr>
                 {% endfor %}
@@ -35,4 +35,9 @@
 {% block stylesheet %}
     {{ parent() }}
     <link rel="stylesheet" type="text/css" href="/tgsoft/modules/accounts/assets/accounts.css">
+{% endblock %}
+
+{% block javascript_intern %}
+    {{ parent() }}
+    <script type="text/javascript" src="/tgsoft/modules/accounts/assets/account.js"></script>
 {% endblock %}

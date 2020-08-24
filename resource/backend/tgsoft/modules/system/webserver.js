@@ -17,6 +17,9 @@ import {default as session} from 'express-session';
 import flash from 'express-flash';
 import methodOverride from 'method-override';
 import Twig from 'twig';
+import path from "path";
+import {TGSoft} from "../tgsoft/tgsoft";
+import fs from "fs";
 
 /** WebServer Class **/
 export default class WebServer {
@@ -75,4 +78,21 @@ export default class WebServer {
         if ( req.isAuthenticated() ) { res.redirect('/'); }
         next();
     }
+
+    toOutput(req, res, fileName, path, params) {
+        let _fileName = TGSoft.directories.frontend;
+
+        console.log(_fileName);
+        /*
+        let _fileName = path.join(TGSoft.directories.frontend, 'tgsoft', 'modules', 'accounts', fileName);
+        let _altFileName = path.join(TGSoft.directories.frontend, 'tgsoft_override', 'modules', 'accounts', fileName);
+        if ( fileName === 'error.twig') {
+            _fileName = path.join(TGSoft.directories.frontend, 'tgsoft', 'modules', 'error', 'error.twig');
+            _altFileName = path.join(TGSoft.directories.frontend, 'tgsoft_override', 'modules', 'error', 'error.twig');
+        }
+        if ( fs.existsSync(_altFileName) ) { res.render(_altFileName, {}); }
+        else { res.render(_fileName, !params ? {} : params) }
+         */
+    }
+
 }
