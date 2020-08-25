@@ -1,0 +1,36 @@
+{% extends '/tgsoft/basic/backend/basic.twig' %}
+
+{% block navigation_main %}{{ parent() }}{% endblock %}
+
+{% block content %}
+    <table id="tbl_roles" class="tblsorter">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Active</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for role in lstRoles %}
+                <tr>
+                    <td>{{ role.id }}</td>
+                    <td>{{ role.name }}</td>
+                    <td>{{ role.active }}</td>
+                    <td><span class="options"><input type="button" class="btnChange" value="Change" roleId="{{ role.id }}"></span></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <!--<link rel="stylesheet" type="text/css" href="/tgsoft/modules/rights/assets/accounts.css">-->
+{% endblock %}
+
+{% block javascript_intern %}
+    {{ parent() }}
+    <script type="text/javascript" src="/tgsoft/modules/rights/assets/roles.js"></script>
+{% endblock %}

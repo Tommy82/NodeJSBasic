@@ -18,7 +18,6 @@ import flash from 'express-flash';
 import methodOverride from 'method-override';
 import Twig from 'twig';
 import path from "path";
-import {TGSoft} from "../tgsoft/tgsoft";
 import fs from "fs";
 
 /** WebServer Class **/
@@ -33,9 +32,11 @@ export default class WebServer {
      * @type {object}
      */
     passport = undefined;
+    directories = undefined;
 
     /** Instantiate a new WebServer Instance */
     constructor(coreEvents, directories, settings) {
+        this.directories = directories;
         this.app = express();                                                       // Initialize Express Webserver
         if (settings.webServer.templateSystem === 'twig') {                        // If Template System equals Twig ...
             this.app.engine('twig', Twig.__express);                                // ... set Twig to Express as default Engine
@@ -79,20 +80,15 @@ export default class WebServer {
         next();
     }
 
-    toOutput(req, res, fileName, path, params) {
-        let _fileName = TGSoft.directories.frontend;
-
-        console.log(_fileName);
-        /*
-        let _fileName = path.join(TGSoft.directories.frontend, 'tgsoft', 'modules', 'accounts', fileName);
-        let _altFileName = path.join(TGSoft.directories.frontend, 'tgsoft_override', 'modules', 'accounts', fileName);
-        if ( fileName === 'error.twig') {
-            _fileName = path.join(TGSoft.directories.frontend, 'tgsoft', 'modules', 'error', 'error.twig');
-            _altFileName = path.join(TGSoft.directories.frontend, 'tgsoft_override', 'modules', 'error', 'error.twig');
-        }
-        if ( fs.existsSync(_altFileName) ) { res.render(_altFileName, {}); }
+    toOutput(req, res, filePath, fileName, params) {
+        let _fileName = this.directories.frontend;
+        let _altFileName = this.directories.frontend;
+        if ( filePath && filePath.length > 0 ) { filePath.map(item => {
+            _fileName = path.join(_fileName, item);
+            if ( item === 'tgsoft' ) { _altFileName = path.join(_altFileName, 'tgsoft_override'); } else { _altFileName = path.join(_altFileName, item); }
+        })}
+        _fileName = path.join(_fileName, fileName);
+        if ( fs.existsSync(_altFileName) ) { res.render(_altFileName, !params ? {} : params); }
         else { res.render(_fileName, !params ? {} : params) }
-         */
     }
-
 }

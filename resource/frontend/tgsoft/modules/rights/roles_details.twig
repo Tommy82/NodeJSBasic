@@ -1,0 +1,49 @@
+{% extends '/tgsoft/basic/backend/basic.twig' %}
+
+{% block navigation_main %}{{ parent() }}{% endblock %}
+
+{% block content %}
+    <div id="details">
+        <table id="tbl_details_role">
+            <tr>
+                <td>ID:</td>
+                <td>{{ role.id }}</td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td>{{ role.name }}</td>
+            </tr>
+            <tr>
+                <td>Active:</td>
+                <td>{{ role.active }}</td>
+            </tr>
+        </table>
+
+        <!--
+        <table id="tbl_account">
+            <tr>
+                <td>ID:</td>
+                <td>{{ account.id }}</td>
+            </tr>
+            <tr>
+                <td><label for="txt_username">Username:</label></td>
+                <td><input type="text" value="{{ account.userName }}" id="txt_username" name="txt_username"></td>
+            </tr>
+            <tr>
+                <td><label>RoleType:</label></td>
+                <td>{{ account.roleType }}</td>
+            </tr>
+        </table>
+        -->
+    </div>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <!--<link rel="stylesheet" type="text/css" href="/tgsoft/modules/accounts/assets/details.css">-->
+{% endblock %}
+
+{% block javascript_intern %}
+    {{ parent() }}
+    <!--<script type="text/javascript" src="/tgsoft/modules/accounts/assets/details.js"></script>-->
+{% endblock %}

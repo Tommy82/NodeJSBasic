@@ -4,7 +4,7 @@ import { default as Roles } from '../classes/roles.js';
 export async function save() {
     return new Promise((resolve, reject) => {
         try {
-            TGSoft.database.save('roles',
+            TGSoft.database.upsert('roles',
                 {
                     id: this.id,
                     name: this.name,
@@ -21,7 +21,10 @@ export async function getById(roleId) {
         try {
             TGSoft.database.findById('roles', [roleId])
                 .catch ( err => { return resolve(err); })
-                .then(res => { return resolve(convertDBListToClass(res)); })
+                .then(res => {
+                    if ( res && res.length > 0 ) { return resolve(convertDBToClass(res[0])) }
+                    else { return resolve(new Roles()); }
+                })
         } catch ( err )  { return reject(err); }
     })
 }
