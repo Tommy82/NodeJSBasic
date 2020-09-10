@@ -6,6 +6,7 @@ import { default as WebServerClass } from '../system/webserver.js';
 import { default as Logging } from '../system/logging.js';
 import fs from 'fs';
 import path from 'path';
+import Rights from "../rights/classes/rights.js";
 
 let TGSoft = undefined;
 
@@ -28,6 +29,8 @@ class TGSoftClass {
     log = undefined;
     /** Global Module List **/
     modules = undefined;
+    /** Global Right List **/
+    rights = undefined;
     /** Global - Settings Content **/
     settings = undefined;
     /** Global WebServer */
@@ -43,6 +46,7 @@ class TGSoftClass {
         this.helper = HelperClass;
         this.events = new events.EventEmitter();
         this.modules = [];
+        this.rights = [];
         this.webServer = new WebServerClass(this.events, this.directories, this.settings);
     }
 
@@ -63,11 +67,25 @@ class TGSoftClass {
         let entityArray = [];
         if ( this.modules && this.modules.length > 0 ) {
             await HelperClass.lists.asyncForEach(this.modules, async(module) => {
+                let moduleName = 'undefined';
+                if ( module && module.moduleName ) { moduleName = module.moduleName }
                 if ( module && module.init ) { await module.init(); }
                 if ( module.entities && module.entities.length > 0 ) {
                     for ( let i = 0; i < module.entities.length; i++ ) {
                         if ( module.entities[i] !== undefined ) {
                             entityArray.push(module.entities[i]);
+                        }
+                    }
+                }
+                if ( module.rights && module.rights.length > 0 ) {
+                    for ( let i = 0; i < module.rights.length; i++ ) {
+                        if ( module.rights[i] !== undefined ) {
+                            this.rights.push({
+                                moduleName: moduleName,
+                                key: module.rights[i].key,
+                                desc: module.rights[i].desc,
+                                defaultRole: module.rights[i].defaultRole
+                            })
                         }
                     }
                 }
@@ -86,6 +104,31 @@ class TGSoftClass {
         await HelperClass.lists.asyncForEach(this.modules, async(module) => {
             if ( module && module.install ) { await module.install(); }
         })
+
+        console.log('[TGSoft] - Install Rights')
+        let lstRights = await Rights.getAll(true);
+        if ( this.rights && this.rights.length > 0 ) {
+            await HelperClass.lists.asyncForEach(this.rights, async(right) => {
+                let dbRight = undefined;
+                if ( lstRights && lstRights.length > 0 ) {
+                    dbRight = lstRights.find(x => x.moduleName === right.moduleName && x.name === right.key);
+                }
+                if ( dbRight && dbRight.id > 0 ) {
+                    dbRight.defaultRole = right.defaultRole;
+                    dbRight.desc = right.desc;
+                } else {
+                    dbRight = new Rights();
+                    dbRight.moduleName = right.moduleName;
+                    dbRight.active = true;
+                    dbRight.defaultRole = right.defaultRole;
+                    dbRight.desc = right.desc;
+                    dbRight.name = right.key;
+                    dbRight.id = 0;
+                }
+                await dbRight.save();
+            });
+        }
+
     }
 
     /**

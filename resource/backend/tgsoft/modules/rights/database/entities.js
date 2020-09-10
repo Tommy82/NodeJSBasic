@@ -15,7 +15,9 @@ export const rights = new orm.EntitySchema({
         id: { type: 'int', generated: true, primary: true },
         name: { type: 'varchar', length: 100 },
         active: { type: 'tinyint', default: true },
-        moduleName: { type: 'varchar', length: 100 }
+        moduleName: { type: 'varchar', length: 100 },
+        desc: { type: 'varchar', length: 200, default: '' },
+        defaultRole: { type: 'varchar', length: 50, default: 'none' },
     }
 })
 

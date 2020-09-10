@@ -1,6 +1,7 @@
 import * as fDatabase_RO from '../database/functions_ro.js';
 
 export default class Roles {
+    static moduleName = "TGSoft:Roles";
     id = 0;
     name = '';
     lstRights = [];

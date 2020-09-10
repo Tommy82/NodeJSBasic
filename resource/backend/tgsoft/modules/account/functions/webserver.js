@@ -22,7 +22,7 @@ export function userList(req, res) {
             toOutput(req, res, 'error.twig', { error: err });
         })
         .then(lstAcc => {
-            toOutput(req, res, 'role_list.twig', { lstAccounts : lstAcc })
+            toOutput(req, res, 'list.twig', { lstAccounts : lstAcc })
         })
 }
 
@@ -33,10 +33,10 @@ export function userDetails(req, res) {
             fDatabase.getById(accountId)
                 .catch ( err => { throw err; })
                 .then(acc => {
-                    toOutput(req, res, 'roles_details.twig', { account: acc});
+                    toOutput(req, res, 'details.twig', { account: acc});
                 })
         } else {
-            toOutput(req, res, 'roles_details.twig', { account: new Account()})
+            toOutput(req, res, 'details.twig', { account: new Account()})
         }
     } catch ( err ) {
         TGSoft.log.error('tgsoft:account', err, 'webServer:userDetails:001');
