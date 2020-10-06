@@ -2,6 +2,7 @@ import { TGSoft } from "../../tgsoft/tgsoft.js";
 import passport from 'passport';
 import passport_local from 'passport-local';
 import { default as cAccount } from '../classes/account.js';
+import { default as cRole } from '../../rights/classes/roles.js';
 
 export function passport_initialize() {
     if ( TGSoft.webServer.passport === undefined ) {
@@ -16,7 +17,21 @@ export function passport_initialize() {
                     if (!TGSoft.helper.security.comparePassword(password, acc.hashedPassword)) {
                         return done(null, false, { message: 'front-password'} );
                     }
-                    return done(null, acc);
+
+                    if ( acc && acc.roleType !== '' ) {
+                        cRole.getByName(acc.roleType)
+                            .catch(() => { return done(null, false, { message: 'front-password'} ); })
+                            .then(res => {
+                                if ( !res || res.length === 0 ) { }
+                                res[0].getRights()
+                                    .catch ( () => { return done(null, false, { message: 'front-password'} ); })
+                                    .then(() => {
+                                        acc.role = res;
+                                        console.log(acc.role);
+                                        return done(null, acc);
+                                    })
+                            })
+                    } else { return done(null, acc); }
                 })
         }
         TGSoft.webServer.passport.use(new passport_local.Strategy({ usernameField: 'loginName' }, authenticateUser)); // If Authorisize -> get "loginname" from html formular and check Data

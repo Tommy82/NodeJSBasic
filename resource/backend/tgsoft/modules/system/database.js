@@ -84,6 +84,23 @@ export class DBConnection {
     }
 
     /**
+     * Delete all Records where the value in a specific Column
+     * @param {string} repoName TableName | EntitySchema.Name
+     * @param {object} document Array of delete TableRow | { column: value} | example: {'name': 'myValue'}
+     * @return {Promise<void>}
+     */
+    async delete(repoName, document) {
+        return new Promise((resolve, reject) => {
+          try {
+              const repo = this.connection.getRepository(repoName);
+              repo.delete(document)
+                  .catch ( err => { return reject(err); })
+                  .then(res => { return resolve(res); })
+          } catch ( err ) { return reject(err); }
+        })
+    }
+
+    /**
      * Search all Records with the specific Parameters
      * @param {string} repoName TableName | EntitySchema.name
      * @param {object} document

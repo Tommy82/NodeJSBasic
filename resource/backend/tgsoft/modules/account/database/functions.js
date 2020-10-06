@@ -1,6 +1,11 @@
 import { TGSoft} from "../../tgsoft/tgsoft.js";
 import { default as Account } from '../classes/account.js';
 
+/**
+ * Save the current AccountData
+ * Attention! Must be a prototype of "Account"
+ * @return {Promise<object>} Saved Database-Data
+ */
 export async function save() {
     return new Promise((resolve, reject) => {
         TGSoft.database.upsert('accounts', {
@@ -13,6 +18,11 @@ export async function save() {
     })
 }
 
+/**
+ * Load Account by ID or ID´s
+ * @param {array | int} accountId Internal AccountID
+ * @return {Promise<[Account]>}
+ */
 export async function getById(accountId) {
     return new Promise((resolve, reject) => {
         TGSoft.database.findById('accounts', accountId)
@@ -25,6 +35,11 @@ export async function getById(accountId) {
     })
 }
 
+/**
+ * Load one(!) Account by Username
+ * @param {string} username Login- / Username of Account
+ * @return {Promise<Account>}
+ */
 export async function getByUsername(username) {
     return new Promise((resolve, reject) => {
         TGSoft.database.findOne('accounts', 'userName', username)
@@ -33,6 +48,12 @@ export async function getByUsername(username) {
     })
 }
 
+/**
+ * Update partial Data
+ * @param {int} id Internal Account ID
+ * @param {Object} data
+ * @return {Promise<[Object]>} Updated Data
+ */
 export async function updatePartialData(id, data) {
     return new Promise((resolve, reject) => {
         TGSoft.database.update('accounts', id, data)
@@ -41,6 +62,11 @@ export async function updatePartialData(id, data) {
     })
 }
 
+/**
+ * Load all Active Accounts from Database
+ * @param {boolean} toClass false = returns as array of Object | true = returns List of Account
+ * @return {Promise<[Account]>} Array of DB Entries or Account
+ */
 export async function getAllActive(toClass = false) {
     return new Promise((resolve, reject) => {
         TGSoft.database.find('accounts', { active: true })
@@ -52,6 +78,11 @@ export async function getAllActive(toClass = false) {
     })
 }
 
+/**
+ * Load all Accounts from Database
+ * @param {boolean} toClass false = returns as array of Object | true = returns List of Account
+ * @return {Promise<[Account]>} Array of DB Entries or Account
+ */
 export async function getAll(toClass = false) {
     return new Promise((resolve, reject) => {
         TGSoft.database.findAll('accounts')

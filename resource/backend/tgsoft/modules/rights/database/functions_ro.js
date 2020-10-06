@@ -11,7 +11,17 @@ export async function save() {
                     active: this.active
                 })
                 .catch ( err => { return reject(err); })
-                .then(res => { return resolve(res); })
+                .then(async res => {
+                    if ( res && res.id > 0 ) {
+                        await TGSoft.database.delete('rights_roles', { 'roleId': res.id });
+                        if ( this.lstRights && this.lstRights.length > 0 ) {
+                            await TGSoft.helper.lists.asyncForEach(this.lstRights, async (right) => {
+                                await TGSoft.database.upsert('rights_roles', { roleId: res.id, rightId: right.id, allowed: right.allowed });
+                            });
+                        }
+                    }
+                    return resolve(res);
+                })
         } catch ( err ) { return reject(err); }
     })
 }

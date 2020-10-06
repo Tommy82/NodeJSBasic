@@ -32,7 +32,7 @@ export async function getAll(toClass = false) {
 
 export async function getByRoleId(roleId, toClass = true) {
     return new Promise((resolve, reject) => {
-        TGSoft.database.find('rightsRoles', { roleId: roleId})
+        TGSoft.database.find('rights_roles', { roleId: roleId})
             .catch ( err => { return reject(err); })
             .then(res => {
                 if ( toClass === true && res && res.length > 0 ) { return resolve(createClassFromDB(res[0])) }

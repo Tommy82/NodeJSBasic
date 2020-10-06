@@ -3,34 +3,52 @@
 {% block navigation_main %}{{ parent() }}{% endblock %}
 
 {% block content %}
-    <div id="details">
-        <table id="tbl_details_role">
-            <tr>
-                <td>ID:</td>
-                <td>{{ role.id }}</td>
-            </tr>
-            <tr>
-                <td>Name:</td>
-                <td>{{ role.name }}</td>
-            </tr>
-            <tr>
-                <td>Active:</td>
-                <td>{{ role.active }}</td>
-            </tr>
-            <tr>
-                <td>Roles:</td>
-
-            </tr>
-        </table>
-    </div>
+    <form method="post" action="">
+        <div id="details">
+            <table id="tbl_details_role">
+                <tr><td>ID:</td><td>{{ role.id }}</td></tr>
+                <tr><td>Name:</td><td>{{ role.name }}</td></tr>
+                <tr><td>Active:</td><td>{{ role.active }}</td></tr>
+                <tr><td>Roles:</td>
+                    <td>
+                        <table id="tblRights">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Active</th>
+                                    <th>ModuleName</th>
+                                    <th>Desc</th>
+                                    <th>Role</th>
+                                    <th>Allowed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for right in role.lstRights %}
+                                    <tr>
+                                        <td>{{ right.id }}</td>
+                                        <td>{{ right.name }}</td>
+                                        <td>{{ right.active }}</td>
+                                        <td>{{ right.moduleName }}</td>
+                                        <td>{{ right.desc }}</td>
+                                        <td>{{ right.defaultRole }}</td>
+                                        <td><input type="checkbox" name="right_{{ right.id }}" id="right_{{ right.id }}" {% if right.allowed == true %}checked{% endif %}>&nbsp;{{ right.allowed }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="Save Data">
+        </div>
+    </form>
 {% endblock %}
 
 {% block stylesheet %}
     {{ parent() }}
-    <!--<link rel="stylesheet" type="text/css" href="/tgsoft/modules/accounts/assets/details.css">-->
 {% endblock %}
 
 {% block javascript_intern %}
     {{ parent() }}
-    <!--<script type="text/javascript" src="/tgsoft/modules/accounts/assets/details.js"></script>-->
 {% endblock %}
