@@ -1,3 +1,4 @@
+/** Class fpr DateTime Functions */
 export default class DateTime {
     static getCurrentDateTime = getCurrentDateTime;
     static toRealString = toRealString;
@@ -42,6 +43,11 @@ export function getCurrentDateTime() {
     }
 }
 
+/**
+ * Convert the Timestamp to a real DateTime String with Format "yyyy-MM-dd hh:mm:ss"
+ * @param {object} date_ob Timestamp
+ * @return {string} Real Timestamp - DateString
+ */
 export function toRealString(date_ob) {
     let date = ("0" + date_ob.getDate()).slice(-2);
     let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
@@ -52,6 +58,11 @@ export function toRealString(date_ob) {
     return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
 }
 
+/**
+ * Convert the Timestamp to a real UTC DateTime String with Format "yyyy-MM-dd hh:mm:ss"
+ * @param date_ob
+ * @return {string}
+ */
 export function toRealUTCString(date_ob) {
     let date = ("0" + date_ob.getUTCDate()).slice(-2);
     let month = ("0" + (date_ob.getUTCMonth() + 1)).slice(-2);

@@ -2,7 +2,7 @@ import * as fDatabase_RO from '../database/functions_ro.js';
 import * as fFunction_RI from '../functions/functions_ri.js';
 
 export default class Roles {
-    static moduleName = "TGSoft:Roles";
+    static moduleName = "TGSoft_Roles";
     id = 0;
     name = '';
     lstRights = [];

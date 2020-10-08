@@ -1,5 +1,9 @@
 import { default as orm } from 'typeorm';
 
+/**
+ * Database EntitySchema -> Accounts
+ * User Accounts for Backend Users
+ */
 export const accounts = new orm.EntitySchema({
     name: 'accounts',
     columns: {

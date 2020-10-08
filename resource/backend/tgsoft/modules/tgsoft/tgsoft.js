@@ -33,11 +33,14 @@ class TGSoftClass {
     rights = undefined;
     /** Global - Settings Content **/
     settings = undefined;
+
     /** Global WebServer */
     webServer = undefined;
+
     /** Global Texts **/
     languages = undefined;
 
+    /** Generate a new Instance of TGSoft Core Class **/
     constructor() {
         console.log('[TGSoft] - Start - Server')
         this.settings = TGSettings;
@@ -50,6 +53,7 @@ class TGSoftClass {
         this.webServer = new WebServerClass(this.events, this.directories, this.settings);
     }
 
+    /** Set Global Directories */
     setDirectories() {
         this.directories.root = fs.realpathSync('.');
         this.directories.backend = path.join(this.directories.root, 'resource', 'backend');
@@ -142,6 +146,11 @@ class TGSoftClass {
         })
     }
 
+    /**
+     * Add a module to Global Modules to init and install the Module.
+     * After Finish start all Modules, the Array was cleared to clean Resources
+     * @param module
+     */
     addModule(module) { this.modules.push(module); }
 }
 

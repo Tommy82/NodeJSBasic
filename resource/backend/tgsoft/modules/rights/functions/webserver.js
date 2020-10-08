@@ -16,13 +16,8 @@ export async function get_roles_details(req, res) {
             .catch (err => { TGSoft.webServer.toOutput(req, res, [], 'error.twig', { error: err }); })
             .then(async role => {
                 role.getRights()
-                    .catch(err => {
-                        console.log(err);
-                    })
-                    .then(() => {
-                        // Send Data to Output
-                        TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'rights'], 'roles_details.twig', {role: role});
-                    });
+                    .catch(err => { TGSoft.webServer.toOutput(req, res, [], 'error.twig', { error: err }); })
+                    .then(() => { TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'rights'], 'roles_details.twig', {role: role}); });
             })
     } else { TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'rights'], 'roles_details.twig', { role: new Roles()}); }
 }

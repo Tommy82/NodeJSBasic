@@ -16,8 +16,9 @@ let currConnection = undefined;
 
 /** Global Database Class */
 export class DBConnection {
-
+    /** Database Connection **/
     connection = undefined;
+    /** true = Connected Successful | false = Connected Failed **/
     isConnected = false;
 
     /**
@@ -213,7 +214,7 @@ export class DBConnection {
     /**
      * Update the Database Entry with the specific ID
      * @param {string} repoName TableName | EntitySchema.name
-     * @param {integer} id ID that should be updated
+     * @param {int} id ID that should be updated
      * @param {object} document Record Content as Class
      * @return {Promise<Database Record>} the Updated Data
      */

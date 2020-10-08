@@ -3,6 +3,8 @@
 {% block navigation_main %}{{ parent() }}{% endblock %}
 
 {% block content %}
+    {% if ( myModules.TGSoft_Account.add == 1 ) %}<input type="button" class="btnChange" value="New Account" accountId="0">{% endif %}
+
     <table id="tblAccounts" class="tblsorter">
         <thead>
         <tr>
@@ -21,9 +23,14 @@
                         <td>{{ acc.userName }}</td>
                         <td>{{ acc.roleType }}</td>
                         <td>{{ acc.active }}</td>
-                        <td><span class="options">
-                                <input type="button" class="btnChange" value="Change" accountId="{{ acc.id }}">
-                            </span></td>
+                        <td>
+                            <span class="options">
+                                {# Button - Change #}
+                                {% if ( myModules.TGSoft_Account.changeAll == 1 or (myModules.TGSoft_Account.changeOwn == 1 and currUser.id == acc.id) ) %}
+                                    <input type="button" class="btnChange" value="Change" accountId="{{ acc.id }}">
+                                {% endif %}
+                            </span>
+                        </td>
                     </tr>
                 {% endfor %}
             {% endif %}

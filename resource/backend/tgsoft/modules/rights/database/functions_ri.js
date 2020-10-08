@@ -65,10 +65,12 @@ function createClassFromDB(record) {
  * @return {null|[]}
  */
 function createClassListFromDB(lstRecords) {
-    if ( lstRecords === null ) { return null }
+    if ( !lstRecords ) { return null }
     else {
         let response = [];
-        lstRecords.forEach(item => {  response.push(createClassFromDB(item)) });
+        if ( lstRecords.length > 0 ) {
+            lstRecords.forEach(item => {  response.push(createClassFromDB(item)) });
+        }
         return response;
     }
 }

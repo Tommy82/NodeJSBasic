@@ -1,7 +1,7 @@
 import * as fDatabase_RI from '../database/functions_ri.js';
 
 export default class Rights {
-    static moduleName = "TGSoft:Rights";
+    static moduleName = "TGSoft_Rights";
     id = 0;
     name = '';
     active = false;
