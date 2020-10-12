@@ -3,13 +3,23 @@ import * as fDatabase_RO from '../database/functions_ro.js';
 import Roles from "../classes/roles.js";
 import Rights from "../classes/rights.js";
 
-
+/**
+ * WebServer - Roles List - GET
+ * @param {object} req WebServer-Request
+ * @param {object} res WebServer-Response
+ */
 export function get_roles(req, res) {
     fDatabase_RO.getAll(false)
         .catch (err => { TGSoft.webServer.toOutput(req, res, [], 'error.twig', { error: err }); })
         .then( lstRoles => { TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'rights'], 'role_list.twig', { lstRoles: lstRoles }); })
 }
 
+/**
+ * WebServer - Roles Details - Get
+ * @param {object} req WebServer-Request
+ * @param {object} res WebServer-Response
+ * @return {Promise<void>}
+ */
 export async function get_roles_details(req, res) {
     if ( req.params.id > 0 ) {
         fDatabase_RO.getById(req.params.id)
@@ -22,6 +32,12 @@ export async function get_roles_details(req, res) {
     } else { TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'rights'], 'roles_details.twig', { role: new Roles()}); }
 }
 
+/**
+ * WebServer - Roles Details - Post
+ * @param {object} req WebServer-Request
+ * @param {object} res WebServer-Response
+ * @return {Promise<void>}
+ */
 export async function post_roles_details(req, res) {
 
     let lstRights = await Rights.getAll();

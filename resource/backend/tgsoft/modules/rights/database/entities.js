@@ -1,5 +1,6 @@
 import { default as orm } from 'typeorm';
 
+/** Database - Table of Roles */
 export const roles = new orm.EntitySchema({
     name: 'roles',
     columns: {
@@ -9,6 +10,7 @@ export const roles = new orm.EntitySchema({
     }
 })
 
+/** Database - Table of Rights */
 export const rights = new orm.EntitySchema({
     name: 'rights',
     columns: {
@@ -21,6 +23,7 @@ export const rights = new orm.EntitySchema({
     }
 })
 
+/** Database - Table of RightsRoles | All Rights of a Role */
 export const rightsRoles = new orm.EntitySchema({
     name: 'rightsRoles',
     columns: {

@@ -3,6 +3,10 @@
 {% block navigation_main %}{{ parent() }}{% endblock %}
 
 {% block content %}
+    {% if ( myModules.TGSoft_Roles.add == 1 ) %}
+        <input type="button" class="btnAdd" value="Add" roleId="0">
+    {% endif %}
+
     <table id="tbl_roles" class="tblsorter">
         <thead>
             <tr>
@@ -18,7 +22,9 @@
                     <td>{{ role.id }}</td>
                     <td>{{ role.name }}</td>
                     <td>{{ role.active }}</td>
-                    <td><span class="options"><input type="button" class="btnChange" value="Change" roleId="{{ role.id }}"></span></td>
+                    {% if ( myModules.TGSoft_Roles.change == 1 ) %}
+                        <td><span class="options"><input type="button" class="btnChange" value="Change" roleId="{{ role.id }}"></span></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>

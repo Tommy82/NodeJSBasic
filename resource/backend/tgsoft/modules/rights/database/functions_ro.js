@@ -1,6 +1,11 @@
 import { TGSoft } from "../../tgsoft/tgsoft.js";
 import { default as Roles } from '../classes/roles.js';
 
+/**
+ * Save a specific Role
+ * Attention: Must be called as prototype of Class "Roles"
+ * @return {Promise<object>}
+ */
 export async function save() {
     return new Promise((resolve, reject) => {
         try {
@@ -26,6 +31,11 @@ export async function save() {
     })
 }
 
+/**
+ * Load Role by ID from Database
+ * @param {int} roleId RoleID
+ * @return {Promise<Roles>}
+ */
 export async function getById(roleId) {
     return new Promise((resolve, reject) => {
         try {
@@ -39,6 +49,11 @@ export async function getById(roleId) {
     })
 }
 
+/**
+ * Get a List of Roles by Name
+ * @param {string} roleName 'Complete' Name of Role
+ * @return {Promise<[object]>}
+ */
 export async function getByName(roleName) {
     return new Promise((resolve, reject) => {
         try {
@@ -55,6 +70,11 @@ export async function getByName(roleName) {
     })
 }
 
+/**
+ * Get All Roles from Database
+ * @param {boolean} toClass true = Return DB-Entry as a Instance of Class "Roles" | false = Returns only DB-Entries as Array | Default: true
+ * @return {Promise<[object | Roles]>}
+ */
 export async function getAll(toClass = true) {
     return new Promise((resolve, reject) => {
         try {

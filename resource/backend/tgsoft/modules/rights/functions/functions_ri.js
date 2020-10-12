@@ -1,6 +1,10 @@
 import Rights from "../classes/rights.js";
 
-/** */
+/**
+ * Load all Rights by a Role
+ * Attention: This Function must called as a prototype of the Class "Roles"
+ * @return {Promise<boolean>} True = Successful | False = Failure
+ */
 export async function getRightsByRole() {
     return new Promise(async (resolve, reject) => {
         try {

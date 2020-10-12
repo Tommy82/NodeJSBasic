@@ -4,6 +4,7 @@ import * as fFunctions from '../functions/functions.js';
 /** AccountClass */
 export default class Account {
 
+    /** Name of this Module **/
     static moduleName = "TGSoft_Account"
 
     /** Internal ID **/
@@ -31,6 +32,7 @@ export default class Account {
     static getById = fDatabase.getById;
     static getByUsername = fDatabase.getByUsername;
     static getAll = fDatabase.getAll;
+    static getAllActive = fDatabase.getAllActive;
 }
 
 

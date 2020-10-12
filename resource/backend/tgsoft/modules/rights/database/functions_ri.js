@@ -1,7 +1,11 @@
 import { TGSoft } from "../../tgsoft/tgsoft.js";
 import Rights from "../classes/rights.js";
 
-
+/**
+ * Save a specific Right
+ * Attention: must called as prototype of "Rights"
+ * @return {Promise<object>}
+ */
 export async function save() {
     return new Promise((resolve, reject) => {
         try {
@@ -19,6 +23,11 @@ export async function save() {
     })
 }
 
+/**
+ * Load all Rights from Database
+ * @param {boolean} toClass true = Return DB-Entry as a Instance of Class "Roles" | false = Returns only DB-Entries as Array | Default: false
+ * @return {Promise<[object]>}
+ */
 export async function getAll(toClass = false) {
     return new Promise((resolve, reject) => {
         TGSoft.database.findAll('rights')
@@ -30,6 +39,12 @@ export async function getAll(toClass = false) {
     })
 }
 
+/**
+ * Load all Rights by RoleID from Database
+ * @param {int} roleId RoleID
+ * @param {boolean} toClass true = Return DB-Entry as a Instance of Class "Roles" | false = Returns only DB-Entries as Array | Default: true
+ * @return {Promise<object>}
+ */
 export async function getByRoleId(roleId, toClass = true) {
     return new Promise((resolve, reject) => {
         TGSoft.database.find('rights_roles', { roleId: roleId})
