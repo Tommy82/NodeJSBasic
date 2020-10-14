@@ -21,8 +21,8 @@ export async function save() {
 
 /**
  * Load Account by ID or ID´s
- * @param {array | int} accountId Internal AccountID
- * @return {Promise<[Account]>}
+ * @param {[int]} accountId Internal AccountID
+ * @return {Promise<Account>}
  */
 export async function getById(accountId) {
     return new Promise((resolve, reject) => {
