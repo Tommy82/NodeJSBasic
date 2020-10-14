@@ -26,7 +26,8 @@ class RoleInstall {
     rights = [
         { key: "add", desc: "Hinzufügen einer Rolle", defaultRole: "administrator" },
         { key: "change", desc: "Ändern einer Rolle", defaultRole: "administrator" },
-        { key: "delete", desc: "Löschen einer Rolle", defaultRole: "administrator" }
+        { key: "delete", desc: "Löschen einer Rolle", defaultRole: "administrator" },
+        { key: "showAll", desc: "Zeigt alle Rollen an", defaultRole: "administrator" },
     ];
     moduleName = Roles.moduleName;
 
@@ -47,5 +48,5 @@ class RoleInstall {
     async start() {}
 }
 
-TGSoft.addModule(new RightInstall());
 TGSoft.addModule(new RoleInstall());
+TGSoft.addModule(new RightInstall());

@@ -105,11 +105,13 @@ export default class WebServer {
                     params.lstModuleRights = twigRights;
                     params.myModules = req.user.myRole;
                     params.currUser = req.user;
+                    params.basicSite = TGSoft.settings.webServer.basicSite;
                     this.toTwigOutput(req, res, filePath, fileName, params);
                 })
         } else {
             params.lstModuleRights = [];
             params.myModules = [];
+            params.basicSite = TGSoft.settings.webServer.basicSite;
             this.toTwigOutput(req, res, filePath, fileName, params);
         }
     }

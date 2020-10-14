@@ -25,7 +25,7 @@ export function get_roles(req, res) {
  * @return {Promise<void>}
  */
 export async function get_roles_details(req, res) {
-    if ( req.user.checkIfAllowed(Roles.moduleName, "changeAll")) {
+    if ( req.user.checkIfAllowed(Roles.moduleName, "change")) {
         if ( req.params.id > 0 ) {
         fDatabase_RO.getById(req.params.id)
             .catch (err => { TGSoft.webServer.toOutput(req, res, [], 'error.twig', { error: err }); })
@@ -41,7 +41,7 @@ export async function get_roles_details(req, res) {
                 .then(() => { TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'rights'], 'roles_details.twig', {role: role}); });
         }
     } else {
-        TGSoft.webServer.toOutput(req, res, [], 'access_denied.twig', {module: Roles.moduleName, right: "changeAll" });
+        TGSoft.webServer.toOutput(req, res, [], 'access_denied.twig', {module: Roles.moduleName, right: "change" });
     }
 
 }
@@ -53,7 +53,7 @@ export async function get_roles_details(req, res) {
  * @return {Promise<void>}
  */
 export async function post_roles_details(req, res) {
-    if (req.user.checkIfAllowed(Roles.moduleName, "changeAll")) {
+    if (req.user.checkIfAllowed(Roles.moduleName, "change")) {
         let lstRights = await Rights.getAll();
         let currRole = new Roles();
         if ( req.params.id && req.params.id > 0 ) { currRole = await Roles.getById(req.params.id); }
@@ -72,6 +72,6 @@ export async function post_roles_details(req, res) {
         //get_roles_details(req, res).catch();
         res.redirect("/backend/roles")
     } else {
-        TGSoft.webServer.toOutput(req, res, [], 'access_denied.twig', {module: Roles.moduleName, right: "changeAll" });
+        TGSoft.webServer.toOutput(req, res, [], 'access_denied.twig', {module: Roles.moduleName, right: "change" });
     }
 }

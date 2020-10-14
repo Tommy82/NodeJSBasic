@@ -38,14 +38,13 @@ export function passport_initialize() {
                                     .catch ( () => { return done(null, false, { message: 'front-password'} ); })
                                     .then(() => {
                                         acc.role = res[0];
-
                                         if ( acc.role && acc.role.lstRights && acc.role.lstRights.length > 0 ) {
                                             acc.myRole = [];
                                             acc.role.lstRights.forEach(item => {
                                                 if ( !acc.myRole ) { acc.myRole = [] }
                                                 if ( !acc.myRole[item.moduleName] ) { acc.myRole[item.moduleName] = []; }
 
-                                                acc.myRole[item.moduleName][item.name] = item.allowed === 1 ? 1 : 0;
+                                                acc.myRole[item.moduleName][item.name] = item.allowed === 1 || item.allowed === true ? 1 : 0;
                                             })
                                         }
                                         return done(null, acc);
