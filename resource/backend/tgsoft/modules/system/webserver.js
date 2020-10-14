@@ -105,7 +105,6 @@ export default class WebServer {
                     params.lstModuleRights = twigRights;
                     params.myModules = req.user.myRole;
                     params.currUser = req.user;
-                    console.log(params.myModules);
                     this.toTwigOutput(req, res, filePath, fileName, params);
                 })
         } else {
@@ -136,6 +135,11 @@ export default class WebServer {
             _fileName = path.join(TGSoft.directories.frontend, 'tgsoft', 'modules', 'error', 'error.twig');
             _altFileName = path.join(TGSoft.directories.frontend, 'tgsoft_override', 'modules', 'error', 'error.twig');
         }
+        if ( fileName === 'access_denied.twig') {
+            _fileName = path.join(TGSoft.directories.frontend, 'tgsoft', 'modules', 'error', 'access_denied.twig');
+            _altFileName = path.join(TGSoft.directories.frontend, 'tgsoft_override', 'modules', 'error', 'access_denied.twig');
+        }
+
         if ( fs.existsSync(_altFileName) ) { res.render(_altFileName, !params ? {} : params); }
         else { res.render(_fileName, !params ? {} : params) }
 

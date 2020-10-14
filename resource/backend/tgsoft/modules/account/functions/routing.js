@@ -30,3 +30,6 @@ TGSoft.webServer.app.get('/backend/users', TGSoft.webServer.checkAuthenticated_B
 
 /** WebServer -> UserList -> Get | Load UserDetails **/
 TGSoft.webServer.app.get('/backend/users/details/:id', TGSoft.webServer.checkAuthenticated_Backend, fWebServer.userDetails);
+
+/** WebServer -> UserList -> Post | Save Userdata **/
+TGSoft.webServer.app.post('/backend/users/details/:id', TGSoft.webServer.checkAuthenticated_Backend, fWebServer.postUserDetails);

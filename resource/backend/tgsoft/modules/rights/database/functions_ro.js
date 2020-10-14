@@ -91,6 +91,25 @@ export async function getAll(toClass = true) {
 }
 
 /**
+ * Get All Active Roles from Database
+ * @param {boolean} toClass true = Return DB-Entry as a Instance of Class "Roles" | false = Returns only DB-Entries as Array | Default: true
+ * @return {Promise<[object | Roles]>}
+ */
+export async function getAllActive(toClass = true) {
+    return new Promise((resolve, reject) => {
+        try {
+            TGSoft.database.find('roles', { active: true })
+                .catch ( err => { return reject(err); })
+                .then(res => {
+                    if ( toClass === true ) { return resolve(convertDBListToClass(res)); }
+                    else { return resolve(res); }
+                })
+
+        } catch ( err ) { return resolve(err); }
+    })
+}
+
+/**
  * Convert a DB Entry to the Role Class
  * @param {object} item DB Entry
  * @return {Roles} Single Item of Class

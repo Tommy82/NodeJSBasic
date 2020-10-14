@@ -3,7 +3,7 @@ $(function () {
     $('.tblsorter').tablesorter();
 
     $('.tblsorter_with_search').tablesorter({
-        theme: 'default',
+        theme: 'blue',
         // hidden filter input/selects will resize the columns, so try to minimize the change
         widthFixed: true,
         // initialize zebra striping and filter widgets

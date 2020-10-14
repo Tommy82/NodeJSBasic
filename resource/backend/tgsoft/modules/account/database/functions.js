@@ -12,6 +12,7 @@ export async function save() {
             id: this.id,
             userName: this.userName,
             roleType: this.roleType,
+            active: this.active,
         })
             .catch ( err => { return reject(err); })
             .then(acc => { this.id = acc.id; return resolve(acc); })
@@ -106,6 +107,7 @@ function createClassFromDB(record) {
         response.userName = record.userName ? record.userName : '';
         response.hashedPassword = record.password ? record.password : '';
         response.roleType = record.roleType ? record.roleType : 'none';
+        response.active = record.active ? record.active : false;
     }
     return response;
 }

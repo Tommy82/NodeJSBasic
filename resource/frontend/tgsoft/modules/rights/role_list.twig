@@ -4,27 +4,33 @@
 
 {% block content %}
     {% if ( myModules.TGSoft_Roles.add == 1 ) %}
-        <input type="button" class="btnAdd" value="Add" roleId="0">
+        {% if ( myModules.TGSoft_Account.add == 1 ) %}
+            <a href="/backend/roles/details/0">
+                <button class="btnAdd default_style1" roleId="0">Neu anlegen</button>
+            </a>
+        {% endif %}
     {% endif %}
 
-    <table id="tbl_roles" class="tblsorter">
+    <table id="tbl_roles" class="tblsorter tablesorter-blue">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Active</th>
-                <th>Options</th>
+                <th class="col_id">ID</th>
+                <th class="col_name">Name</th>
+                <th class="col_active">Active</th>
+                <th class="col_options">Options</th>
             </tr>
         </thead>
         <tbody>
             {% for role in lstRoles %}
                 <tr>
-                    <td>{{ role.id }}</td>
-                    <td>{{ role.name }}</td>
-                    <td>{{ role.active }}</td>
+                    <td class="col_id">{{ role.id }}</td>
+                    <td class="col_name">{{ role.name }}</td>
+                    <td class="col_active">{{ role.active }}</td>
+                    <td class="col_options">
                     {% if ( myModules.TGSoft_Roles.change == 1 ) %}
-                        <td><span class="options"><input type="button" class="btnChange" value="Change" roleId="{{ role.id }}"></span></td>
+                        <button class="btnChange default_style1" roleId="{{ role.id }}">Ändern</button>
                     {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -33,7 +39,7 @@
 
 {% block stylesheet %}
     {{ parent() }}
-    <!--<link rel="stylesheet" type="text/css" href="/tgsoft/modules/rights/assets/accounts.css">-->
+    <link rel="stylesheet" type="text/css" href="/tgsoft/modules/rights/assets/roles.css">
 {% endblock %}
 
 {% block javascript_intern %}

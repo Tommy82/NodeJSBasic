@@ -4,3 +4,4 @@ $(document).ready(() => {
         window.location.href = `/backend/roles/details/${roleId}`;
     })
 })
+

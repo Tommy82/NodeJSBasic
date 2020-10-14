@@ -1,24 +1,25 @@
 # NodeJS Framework
-a simple NodeJS Framework
+a simple NodeJS Framework<br>
 
-I try to write all Comments in English, I´m sorry if it is not perfect.
-The HTML Language is actually German, because most of my Customers are from Germany.
-In a later Version, I will build a Metalanguages System with i18n. 
-
-Includes:
-    - WebServer ( Express )
-    - TemplateSystem ( Twig )
-    - Database ( TypeORM ) ( Current optimized for MySQL )
-    - Plugin System
-    - Folder "frontend" is only for frontend files! In subFolder "compiled", the core save the files from "views".
-    
-Folder-Structure of Plugins:
-    - [folder]
-        -> helper.js
-        -> views    >> Files of Frontend
-            -> css      >> Stylesheets 
-            -> img      >> Images 
-            -> js       >> Scripts
-            -> other    >> Other Files 
-            -> twig     >> Template Files
+I try to write all Comments in English, I´m sorry if it is not perfect.<br>
+The HTML Language is actually German, because most of my Customers are from Germany.<br>
+In a later Version, I will build a Metalanguages System with i18n. <br>
+<br>
+Includes:<br>
+    - WebServer ( Express )<br>
+    - TemplateSystem ( Twig )<br>
+    - Database ( TypeORM ) ( Current optimized for MySQL )<br>
+    - Module System<br>
+    - Override the Frontend "Core" files with "tgsoft_override"<br>
+    - Folder "frontend" is only for frontend files!<br>
+    - The complete Core only needs 2 Main Folders ( backend/tgsoft | frontend/tgsoft). Do not change anything in these folders, or updates can destroy your Program.<br> 
+    <br>
+Folder-Structure of Plugins:<br>
+    - [folder - Backend]<br>
+        -> [classes] // Classes of the Module<br>
+        -> [database] // Database entities and functions of Module<br>
+        -> [functions] // Other functions of Module<br>
+    - [folder - frontend]<br>
+        -> free as use<br>
+            
     

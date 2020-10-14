@@ -3,31 +3,33 @@
 {% block navigation_main %}{{ parent() }}{% endblock %}
 
 {% block content %}
-    {% if ( myModules.TGSoft_Account.add == 1 ) %}<input type="button" class="btnChange" value="New Account" accountId="0">{% endif %}
+    {% if ( myModules.TGSoft_Account.add == 1 ) %}
+        <button class="btnChange default_style1" accountId="0">New Account</button>
+    {% endif %}
 
-    <table id="tblAccounts" class="tblsorter">
+    <table id="tblAccounts" class="tblsorter tablesorter-blue">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Active</th>
-            <th>Options</th>
+            <th class="col_id">ID</th>
+            <th class="col_name">Name</th>
+            <th class="col_role">Role</th>
+            <th class="col_active">Active</th>
+            <th class="col_options">Options</th>
         </tr>
         </thead>
         <tbody>
             {% if lstAccounts and lstAccounts.length > 0 %}
                 {% for acc in lstAccounts %}
                     <tr>
-                        <td>{{ acc.id }}</td>
-                        <td>{{ acc.userName }}</td>
-                        <td>{{ acc.roleType }}</td>
-                        <td>{{ acc.active }}</td>
-                        <td>
+                        <td class="col_id">{{ acc.id }}</td>
+                        <td class="col_name">{{ acc.userName }}</td>
+                        <td class="col_role">{{ acc.roleType }}</td>
+                        <td class="col_active">{{ acc.active }}</td>
+                        <td class="col_options">
                             <span class="options">
                                 {# Button - Change #}
                                 {% if ( myModules.TGSoft_Account.changeAll == 1 or (myModules.TGSoft_Account.changeOwn == 1 and currUser.id == acc.id) ) %}
-                                    <input type="button" class="btnChange" value="Change" accountId="{{ acc.id }}">
+                                    <button class="btnChange default_style1" accountId="{{ acc.id }}">Change</button>
                                 {% endif %}
                             </span>
                         </td>

@@ -1,0 +1,18 @@
+
+#account_change_header {
+    font-size: 1.2em;
+    text-align: left;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+#tbl_account td {
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+}
+
+#tbl_account tr:hover td {background-color: RGB(240,240,240); }
+
+.details_col1 { width: 10em; }
+.details_col2 { width: 20em; }
+.details_col3 { width: 20em; }

@@ -9,9 +9,13 @@ import Rights from "../classes/rights.js";
  * @param {object} res WebServer-Response
  */
 export function get_roles(req, res) {
-    fDatabase_RO.getAll(false)
-        .catch (err => { TGSoft.webServer.toOutput(req, res, [], 'error.twig', { error: err }); })
-        .then( lstRoles => { TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'rights'], 'role_list.twig', { lstRoles: lstRoles }); })
+    if ( req.user.checkIfAllowed(Roles.moduleName, "showAll")) {
+        fDatabase_RO.getAll(false)
+            .catch (err => { TGSoft.webServer.toOutput(req, res, [], 'error.twig', { error: err }); })
+            .then( lstRoles => { TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'rights'], 'role_list.twig', { lstRoles: lstRoles }); })
+    } else {
+        TGSoft.webServer.toOutput(req, res, [], 'access_denied.twig', {module: Roles.moduleName, right: "changeAll" });
+    }
 }
 
 /**
@@ -21,7 +25,8 @@ export function get_roles(req, res) {
  * @return {Promise<void>}
  */
 export async function get_roles_details(req, res) {
-    if ( req.params.id > 0 ) {
+    if ( req.user.checkIfAllowed(Roles.moduleName, "changeAll")) {
+        if ( req.params.id > 0 ) {
         fDatabase_RO.getById(req.params.id)
             .catch (err => { TGSoft.webServer.toOutput(req, res, [], 'error.twig', { error: err }); })
             .then(async role => {
@@ -29,7 +34,16 @@ export async function get_roles_details(req, res) {
                     .catch(err => { TGSoft.webServer.toOutput(req, res, [], 'error.twig', { error: err }); })
                     .then(() => { TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'rights'], 'roles_details.twig', {role: role}); });
             })
-    } else { TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'rights'], 'roles_details.twig', { role: new Roles()}); }
+        } else {
+            let role = new Roles();
+            role.getRights()
+                .catch(err => { TGSoft.webServer.toOutput(req, res, [], 'error.twig', { error: err }); })
+                .then(() => { TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'rights'], 'roles_details.twig', {role: role}); });
+        }
+    } else {
+        TGSoft.webServer.toOutput(req, res, [], 'access_denied.twig', {module: Roles.moduleName, right: "changeAll" });
+    }
+
 }
 
 /**
@@ -39,11 +53,10 @@ export async function get_roles_details(req, res) {
  * @return {Promise<void>}
  */
 export async function post_roles_details(req, res) {
-
-    let lstRights = await Rights.getAll();
-    if ( req.params.id && req.params.id > 0 ) {
-
-        let currRole = await Roles.getById(req.params.id);
+    if (req.user.checkIfAllowed(Roles.moduleName, "changeAll")) {
+        let lstRights = await Rights.getAll();
+        let currRole = new Roles();
+        if ( req.params.id && req.params.id > 0 ) { currRole = await Roles.getById(req.params.id); }
 
         if ( lstRights && lstRights.length > 0 ) {
             lstRights.forEach(item => {
@@ -52,8 +65,13 @@ export async function post_roles_details(req, res) {
             });
         }
 
+        currRole.name = req.body['txt_name'];
         currRole.lstRights = lstRights;
         await currRole.save()
+
+        //get_roles_details(req, res).catch();
+        res.redirect("/backend/roles")
+    } else {
+        TGSoft.webServer.toOutput(req, res, [], 'access_denied.twig', {module: Roles.moduleName, right: "changeAll" });
     }
-    get_roles_details(req, res).catch();
 }

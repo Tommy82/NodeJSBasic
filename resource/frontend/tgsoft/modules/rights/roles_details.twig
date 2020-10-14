@@ -3,50 +3,78 @@
 {% block navigation_main %}{{ parent() }}{% endblock %}
 
 {% block content %}
+
+    <div id="role_change_header">
+        {% if role.id > 0 %}Ändern einer vorhandenen Rolle
+        {% else %}Anlage einer neuen Rolle
+        {% endif %}
+    </div>
+
     <form method="post" action="">
         <div id="details">
             <table id="tbl_details_role">
-                <tr><td>ID:</td><td>{{ role.id }}</td></tr>
-                <tr><td>Name:</td><td>{{ role.name }}</td></tr>
-                <tr><td>Active:</td><td>{{ role.active }}</td></tr>
-                <tr><td>Roles:</td>
-                    <td>
-                        <table id="tblRights">
+                <tr>
+                    <td class="details_col1">ID:</td>
+                    <td class="details_col2">{{ role.id }}</td>
+                    <td class="details_col3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="details_col1"><label for="txt_name">Name:</label></td>
+                    <td class="details_col2"><input type="text" name="txt_name" id="txt_name" value="{{ role.name }}" class="default_style1"></td>
+                    <td class="details_col3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="details_col1"><label for="chk_active">Aktiv:</label></td>
+                    <td class="details_col2"><input type="checkbox" name="chk_active" id="chk_active" {% if role.active ==1 %}checked{% endif %} class="default_style1"></td>
+                    <td class="details_col3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="details_col1">Rechte:</td>
+                    <td class="details_col2" colspan="2">
+                        <table id="tblRights" class="tblsorter tablesorter-blue">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Active</th>
-                                    <th>ModuleName</th>
-                                    <th>Desc</th>
-                                    <th>Role</th>
-                                    <th>Allowed</th>
+                                    <th class="details_rights_col_id">ID</th>
+                                    <th class="details_rights_col_module">ModuleName</th>
+                                    <th class="details_rights_col_name">Name</th>
+                                    <!--<th class="details_rights_col_active">Active</th>-->
+                                    <th class="details_rights_col_desc">Beschreibung</th>
+                                    <!--<th class="details_rights_col_role">Role</th>-->
+                                    <th class="details_rights_col_allow">Erlaubt</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for right in role.lstRights %}
                                     <tr>
-                                        <td>{{ right.id }}</td>
-                                        <td>{{ right.name }}</td>
-                                        <td>{{ right.active }}</td>
-                                        <td>{{ right.moduleName }}</td>
-                                        <td>{{ right.desc }}</td>
-                                        <td>{{ right.defaultRole }}</td>
-                                        <td><input type="checkbox" name="right_{{ right.id }}" id="right_{{ right.id }}" {% if right.allowed == true %}checked{% endif %}>&nbsp;{{ right.allowed }}</td>
+                                        <td class="details_rights_col_id">{{ right.id }}</td>
+                                        <td class="details_rights_col_module">{{ right.moduleName }}</td>
+                                        <td class="details_rights_col_name">{{ right.name }}</td>
+                                        <!--<td class="details_rights_col_active">{{ right.active }}</td>-->
+                                        <td class="details_rights_col_desc">{{ right.desc }}</td>
+                                        <!--<td class="details_rights_col_role">{{ right.defaultRole }}</td>-->
+                                        <td class="details_rights_col_allow">
+                                            <label for="right_{{ right.id }}">&nbsp;</label>
+                                            <input type="checkbox" name="right_{{ right.id }}" id="right_{{ right.id }}" class="default_style1" {% if right.allowed == true %}checked{% endif %}>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
                     </td>
                 </tr>
+                <tr>
+                    <td class="details_col1">&nbsp;</td>
+                    <td class="details_col2"><button type="submit" class="default_style1">Speichern</button></td>
+                    <td class="details_col3"><a href="/backend/roles"><button type="button" class="default_style1">Abbrechen</button></a></td>
+                </tr>
             </table>
-            <input type="submit" value="Save Data">
         </div>
     </form>
 {% endblock %}
 
 {% block stylesheet %}
     {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="/tgsoft/modules/rights/assets/roles.css">
 {% endblock %}
 
 {% block javascript_intern %}

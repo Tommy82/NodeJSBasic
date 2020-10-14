@@ -1,0 +1,27 @@
+/** List **/
+
+#tbl_roles { width: 90em; }
+
+.col_id { width: 5em; }
+.col_name { width: auto; }
+.col_role { width: 30em; }
+.col_active { width: 5em; }
+.col_options { width: 20em; }
+
+.col_options .btnChange { width: 5em; }
+
+/** Details **/
+
+#role_change_header {
+    font-size: 1.2em;
+    text-align: left;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+
+.details_col1 { width: 10em; }
+.details_col2 { width:  70em; }
+
+
+

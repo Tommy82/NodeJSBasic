@@ -14,6 +14,7 @@ export function passport_initialize() {
                 .catch ( err => { TGSoft.log.error('tgsoft:account:security:passport_initialize', err, '001'); })
                 .then(acc => {
                     if ( !acc || acc.id === 0 ) { return done(null, false, { message: 'no-user' }); }
+                    if ( !acc.active ) { return done(null, false, { message: 'no-user'}); }
                     if (!TGSoft.helper.security.comparePassword(password, acc.hashedPassword)) {
                         return done(null, false, { message: 'front-password'} );
                     }

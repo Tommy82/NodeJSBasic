@@ -12,4 +12,6 @@ export default class Roles {
 
     static getByName = fDatabase_RO.getByName;
     static getById = fDatabase_RO.getById;
+    static getAll = fDatabase_RO.getAll;
+    static getAllActive = fDatabase_RO.getAllActive;
 }

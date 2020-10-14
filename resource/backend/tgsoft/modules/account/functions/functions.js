@@ -26,18 +26,13 @@ export async function updatePassword() {
  * Check if a User allowed to Do Action
  * @param {string} moduleName Name of the Module
  * @param {string} rightName Name of the Right
- * @return {Promise<boolean>} true = User Allowed | false = User not Allowed
+ * @return {boolean} true = User Allowed | false = User not Allowed
  */
-export async function checkIfAllowed(moduleName, rightName) {
-    return new Promise((resolve, reject) => {
-        try {
-            if ( this.role && this.role.lstRights.length > 0 ) {
-                let tmp = this.role.lstRights.find(x => x.moduleName === moduleName && x.name === rightName );
-                if ( tmp && (tmp.allowed === 1 || tmp.allowed === true )) { return resolve(true); }
-                else { return resolve(false); }
-            } else { return resolve(false); }
-        } catch ( err ) { return reject(err); }
-    })
+export function checkIfAllowed(moduleName, rightName) {
+    if ( this.role && this.role.lstRights.length > 0 ) {
+        let tmp = this.role.lstRights.find(x => x.moduleName === moduleName && x.name === rightName );
+        return !!(tmp && (tmp.allowed === 1 || tmp.allowed === true));
+    } else { return false; }
 }
 
 /**
