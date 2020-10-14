@@ -132,6 +132,7 @@ export default class WebServer {
             if ( item === 'tgsoft' ) { _altFileName = path.join(_altFileName, 'tgsoft_override'); } else { _altFileName = path.join(_altFileName, item); }
         })}
         _fileName = path.join(_fileName, fileName);
+        _altFileName = path.join(_fileName, fileName);
 
         if ( fileName === 'error.twig') {
             _fileName = path.join(TGSoft.directories.frontend, 'tgsoft', 'modules', 'error', 'error.twig');
