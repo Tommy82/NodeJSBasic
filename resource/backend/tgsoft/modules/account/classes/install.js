@@ -67,4 +67,4 @@ class AccountInstall {
 TGSoft.addModule(new AccountInstall());
 
 /** Initialize Passport Manager to authenticate Users in Frontend and Backend **/
-fSecurity.passport_initialize();
+//fSecurity.passport_initialize();

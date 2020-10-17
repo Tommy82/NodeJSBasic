@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { TGSoft } from './modules/tgsoft/tgsoft.js'
+import * as fSecurity from './modules/account/functions/security.js';
 
 async function loadFiles(fileName) {
     return new Promise(async (resolve, reject) => {
@@ -40,6 +41,10 @@ TGSoft.events.on('core:database:connected', async () => {
     await TGSoft.start();
     console.log('[TGSoft] - Ready to use, enjoy it!')
 });
+
+/** Initialize Passport Manager to authenticate Users in Frontend and Backend **/
+fSecurity.passport_initialize();
+
 
 loadDirectories('./resource/backend')
     .catch(err => { console.error(err); })
