@@ -4,6 +4,9 @@ a simple NodeJS Framework<br>
 I try to write all Comments in English, I´m sorry if it is not perfect.<br>
 The HTML Language is actually German, because most of my Customers are from Germany.<br>
 In a later Version, I will build a Metalanguages System with i18n. <br>
+
+ATTENTION: Don´t change something in folder "backend/tgsoft" or "frontend/tgsoft". A further Update can discard these Changes. If you want to write a Module, create a own folder.
+
 <br>
 Includes:<br>
     - WebServer ( Express )<br>
