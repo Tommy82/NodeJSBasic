@@ -26,7 +26,10 @@
     "mysql": "^2.18.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "pdf-to-printer": "^1.5.2",
+    "puppeteer": "^5.5.0",
     "twig": "^1.15.1",
-    "typeorm": "^0.2.25"
+    "typeorm": "^0.2.25",
+    "uuid": "^8.3.1"
   }
 }

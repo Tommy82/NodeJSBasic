@@ -7,6 +7,7 @@ import { default as Logging } from '../system/logging.js';
 import fs from 'fs';
 import path from 'path';
 import Rights from "../rights/classes/rights.js";
+import { default as Printer } from '../printer/classes/printer.js';
 
 let TGSoft = undefined;
 
@@ -37,6 +38,9 @@ class TGSoftClass {
     /** Global WebServer */
     webServer = undefined;
 
+    /** Global Printer Support **/
+    printer = undefined;
+
     /** Global Texts **/
     languages = undefined;
 
@@ -51,6 +55,7 @@ class TGSoftClass {
         this.modules = [];
         this.rights = [];
         this.webServer = new WebServerClass(this.events, this.directories, this.settings);
+        this.printer = new Printer();
     }
 
     /** Set Global Directories */
