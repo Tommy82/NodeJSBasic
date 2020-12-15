@@ -56,6 +56,7 @@ class TGSoftClass {
         this.rights = [];
         this.webServer = new WebServerClass(this.events, this.directories, this.settings);
         this.printer = new Printer();
+        this.timers = [];
     }
 
     /** Set Global Directories */
@@ -148,6 +149,13 @@ class TGSoftClass {
         console.log('[TGSoft] - Start Modules')
         await HelperClass.lists.asyncForEach(this.modules, async(module) => {
             if ( module && module.start ) { await module.start(); }
+        });
+
+        // Start Timers
+        this.timers.forEach(item => {
+            if ( item.interval > 0 && item.function ) {
+                item.myTimer = setInterval(item.function, item.interval);
+            }
         })
     }
 
