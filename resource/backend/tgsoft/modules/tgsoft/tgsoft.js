@@ -57,6 +57,7 @@ class TGSoftClass {
         this.webServer = new WebServerClass(this.events, this.directories, this.settings);
         this.printer = new Printer();
         this.timers = [];
+        this.currentJobs = []; // Current Jobs ( maybe from timers ) working
     }
 
     /** Set Global Directories */
