@@ -11,12 +11,10 @@ import Roles from "../../rights/classes/roles.js";
 export function userList(req, res) {
     if ( req.user.checkIfAllowed(Account.moduleName, "showAll")) {
         fDatabase.getAll(false)
-            .catch(err => {
-                TGSoft.webServer.toOutput(req, res, [], 'error.twig', {error: err});
-            })
             .then(lstAcc => {
                 TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'accounts'], 'list.twig', {lstAccounts: lstAcc});
             })
+            .catch(err => { TGSoft.webServer.toOutput(req, res, [], 'error.twig', {error: err}); })
     } else {
         TGSoft.webServer.toOutput(req, res, [], 'access_denied.twig', {module: Account.moduleName, right: "showAll" });
     }
@@ -86,7 +84,7 @@ function saveUserFromWebPage(req, res, userAccount) {
     userAccount.roleType = req.body["sel_role"].toLowerCase();
     userAccount.active = !!(req.body["chk_active"] && req.body["chk_active"].toLowerCase() === "on");
     userAccount.save()
-        .catch()
         .then(() => { res.redirect("/backend/users") })
+        .catch()
 
 }

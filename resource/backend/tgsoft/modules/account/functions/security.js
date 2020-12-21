@@ -31,7 +31,6 @@ export function passport_initialize() {
                     /** After Login, load all Rights **/
                     if ( acc && acc.roleType !== '' ) {
                         cRole.getByName(acc.roleType)
-                            .catch(() => { return done(null, false, { message: 'front-password'} ); })
                             .then(res => {
                                 if ( !res || res.length === 0 ) { }
                                 res[0].getRights()
@@ -50,6 +49,7 @@ export function passport_initialize() {
                                         return done(null, acc);
                                     })
                             })
+                            .catch(() => { return done(null, false, { message: 'front-password'} ); })
                     } else { return done(null, acc); }
                 })
         });

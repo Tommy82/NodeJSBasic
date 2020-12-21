@@ -58,11 +58,11 @@ export async function getByName(roleName) {
     return new Promise((resolve, reject) => {
         try {
             TGSoft.database.find('roles', {name: roleName})
-                .catch(err => {
-                    return reject(err);
-                })
                 .then(res => {
                     return resolve(convertDBListToClass(res));
+                })
+                .catch(err => {
+                    return reject(err);
                 })
         } catch (err) {
             return reject(err);

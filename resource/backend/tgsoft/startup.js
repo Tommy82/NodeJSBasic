@@ -47,5 +47,5 @@ fSecurity.passport_initialize();
 
 
 loadDirectories('./resource/backend')
-    .catch(err => { console.error(err); })
     .then(() => { TGSoft.init(); })
+    .catch(err => { console.error(err); })

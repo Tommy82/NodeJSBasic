@@ -38,12 +38,12 @@ export async function toPrinter(url, format, printer) {
             if ( !printer ) { printer = 'Microsoft Print to PDF'; }
 
             toPdf(url, path, format.toString())
-                .catch(err => { return reject(err); })
                 .then(() => {
                     ptp.print(path, { printer: printer})
-                        .catch((err) => { return reject(err); })
                         .then(() => { return resolve(true); })
+                        .catch((err) => { return reject(err); })
                 })
+                .catch(err => { return reject(err); })
         } catch ( err ) { return reject(err); }
     })
 }

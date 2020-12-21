@@ -97,3 +97,128 @@ $(function () {
         }
     });
 });
+
+function makeTableScroll(id, maxRows) {
+    // Constant retrieved from server-side via JSP
+    var table = document.getElementById(id);
+    var wrapper = table.parentNode;
+    var rowsInTable = table.rows.length;
+    var height = 0;
+    if (rowsInTable > maxRows) {
+        for (var i = 0; i < maxRows; i++) {
+            height += table.rows[i].clientHeight;
+        }
+        wrapper.style.height = height + "px";
+        wrapper.style.overflow = "auto";
+    }
+}
+
+/**
+ *
+ * @param {Date} date
+ */
+function convertDate(date = null) {
+    let response = {
+        sYear: date.getFullYear(),
+        sMonth: date.getMonth() > 9 ? (date.getMonth() + 1) : "0" + (date.getMonth() + 1),
+        sDay: date.getDate() >= 10 ? date.getDate() : "0" + date.getDate(),
+        iYear: date.getFullYear(),
+        iMonth: date.getMonth() + 1,
+        iDay: date.getDay(),
+        /** dd.MM.yyyy **/
+        sDate: undefined,
+        /** yyyy-MM-dd **/
+        sDate2: undefined,
+        /** yyyyMMdd **/
+        sDate3: undefined
+    };
+
+    response.sDate = `${response.sDay}.${response.sMonth}.${response.sYear}`;
+    response.sDate2 = `${response.sYear}-${response.sMonth}-${response.sDay}`;
+    response.sDate3 = `${response.sYear}${response.sMonth}${response.sDay}`;
+
+    return response;
+}
+
+/**
+ * Generate a Dynamic Table with Params
+ * parameter: {
+ *      tblId: string               // ID of Table ( Without '#'!!!)
+ *      layout: Array of String,    // List of Internal Fields
+ *      fields: Array of Item       // List of Items
+ *      rows: Array of Data         // Response from Server / Database
+ * }
+ *
+ * items: {
+ *     header: string,          // Name of Table Header
+ *     source: string           // ID of Response Field
+ *     type: string             // Table Type ( default String! Use 'bool' to get Checkbox )
+ *     html: string             // If Source is undefined, you can set self html code. Parameters in Code can get by [[]]. ( Example: [[id]]) = rows[x].id )
+ * }
+ * @param {object} myTable Table Params
+ */
+function generateDynamicTable(myTable) {
+    // Set Header
+    let myHeader = '<tr>';
+    myTable.layout.forEach(layout => {
+        let myData = myTable.fields[layout];
+        if (myData && myData.header) {
+            myHeader += `<th>${myData.header.trim()}</th>`;
+        }
+    })
+    myHeader += '</tr>';
+
+    $(`#${myTable.tblId} thead tr`).remove();
+    $(`#${myTable.tblId} thead`).append(myHeader);
+
+    // Set Body
+    if ( myTable.rows && myTable.rows.length > 0 ) {
+        $(`#${myTable.tblId} tbody tr`).remove();
+        myTable.rows.forEach(currRow => {
+            if ( currRow.id > 0 ) {
+                let myRow = '<tr>';
+                myTable.layout.forEach(layout => {
+                    let myData = myTable.fields[layout];
+                    if ( myData && myData.source ) {
+                        let tmp = eval('currRow.' + myData.source);
+                        if ( myData.type && ( myData.type === 'bool' || myData.type === 'boolean' )) {
+
+                        }
+                        myRow += `<td>${tmp}</td>`;
+                    } else {
+                        if ( myData && myData.html) {
+                            let tmpHtml = myData.html;
+                            myTable.layout.forEach(layout1 => {
+                                let myData1 = myTable.fields[layout1];
+                                if ( myData1 && myData1.source ) {
+                                    let tmp = eval('currRow.' + myData1.source);
+                                    tmpHtml = tmpHtml.replaceAll(`[[${layout1.trim()}]]`, tmp);
+                                }
+                            })
+                            myRow += `<td>${tmpHtml}</td>`;
+                        }
+                    }
+                })
+                myRow += '</tr>';
+                $(`#${myTable.tblId} tbody`).append(myRow);
+            }
+        });
+    }
+
+}
+
+/**
+ * Generate a TableSorter from a normal Table
+ * @param {string} tableName ID of Table ( Without '#' !!! )
+ */
+function setTableSorter(tableName) {
+    let widgets = ['uitheme', 'zebra', 'filter'];
+    let widgets_options = {zebra: ["even", "odd"]}
+
+    $(`#${tableName}`).tablesorter({
+        theme: 'blue', // theme "jui" and "bootstrap" override the uitheme widget option in v2.7+
+        headerTemplate: '{content} {icon}', // needed to add icon for jui theme
+        widgets: widgets,
+        widgetOptions: widgets_options,
+    });
+}

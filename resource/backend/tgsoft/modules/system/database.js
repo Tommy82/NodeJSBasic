@@ -9,7 +9,6 @@
  */
 
 import orm from 'typeorm';
-import events from 'events';
 
 /** Global connection Variable. is used to create the class only once */
 let currConnection = undefined;
@@ -44,11 +43,9 @@ export class DBConnection {
             }
 
             orm.createConnection(config)                                // Create Connection
-                .catch(err => { console.error(err); })
                 .then(conn => {
                     this.connection = conn;                             // Make Connection globally in complete Class
                     conn.synchronize()                                  // Sync DataTables
-                        .catch(err => { throw err; })
                         .then(() => {
                             this.isConnected = true;
                             currConnection = this;                      // Set Global Connection Variable
@@ -56,7 +53,9 @@ export class DBConnection {
                             console.log(`[TGSoft] - Basic Database is ready to use`)
                             return currConnection;  // Callback Connection
                         })
+                        .catch(err => { throw err; })
                 })
+                .catch(err => { console.error(err); })
         }
         return currConnection;
     }
@@ -128,8 +127,8 @@ export class DBConnection {
             try {
                 const repo = this.connection.getRepository(repoName);
                 repo.find()
-                    .catch(err => { return reject(err); })
                     .then(res => { return resolve(res); })
+                    .catch(err => { return reject(err); })
             } catch ( err ) { return reject(err); }
         })
     }
@@ -149,8 +148,8 @@ export class DBConnection {
                     idRef = [ids]
                 }
                 repo.findByIds(idRef)
-                    .catch(err => { return reject(err); })
                     .then(res => { return resolve(res); })
+                    .catch(err => { return reject(err); })
             } catch ( err ) { return reject(err); }
         })
     }
@@ -205,8 +204,8 @@ export class DBConnection {
                     selectionRef = [fieldNames];
                 }
                 repo.find( {select: selectionRef })
-                    .catch(err => { return reject(err); })
                     .then(res => { return resolve(res); })
+                    .catch(err => { return reject(err); })
             } catch(err) { return reject(err); }
         })
     }
@@ -245,8 +244,8 @@ export class DBConnection {
             try {
                 const repo = this.connection.getRepository(repoName);
                 repo.save(document)
-                    .catch(err => { return reject(err); })
                     .then(res => { return resolve(res); })
+                    .catch(err => { return reject(err); })
             } catch ( err ) { return reject(err); }
         })
     }
