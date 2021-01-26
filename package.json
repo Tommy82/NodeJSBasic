@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Tommy82/NodeJSBasic#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "express-flash": "0.0.2",
     "express-session": "^1.17.1",
