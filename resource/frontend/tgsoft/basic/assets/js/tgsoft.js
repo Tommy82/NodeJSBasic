@@ -191,6 +191,7 @@ function generateDynamicTable(myTable) {
 
     $(`#${myTable.tblId} thead tr`).remove();
     $(`#${myTable.tblId} thead`).append(myHeader);
+    let sum = [];
 
     // Set Body
     if ( myTable.rows && myTable.rows.length > 0 ) {
@@ -219,10 +220,19 @@ function generateDynamicTable(myTable) {
                     let myData = myTable.fields[layout];
                     if ( myData && myData.source ) {
                         let tmp = eval('currRow.' + myData.source);
-                        if ( myData.type && ( myData.type === 'bool' || myData.type === 'boolean' )) {
-
+                        // Evtl. Summen zusammenzählen
+                        if ( myData.sum && myData.sum === true ) {
+                            let curr = sum[layout];
+                            if ( !curr ) { curr = 0; sum.push(layout); }
+                            if (!tmp) { tmp = 0; }
+                            sum[layout] = curr + parseFloat(tmp);
                         }
+
+                        // Evtl. Formatierung
+                        tmp = row_format(myData, tmp);
+
                         myRow += `<td>${tmp}</td>`;
+
                     } else {
                         if ( myData && myData.html) {
                             let tmpHtml = myData.html;
@@ -241,7 +251,37 @@ function generateDynamicTable(myTable) {
                 $(`#${myTable.tblId} tbody`).append(myRow);
             }
         });
+        if ( sum ) {
+            let myRow = '<tr>';
+            myTable.layout.forEach(layout => {
+                let myData = myTable.fields[layout];
+                myRow += '<td>';
+                let tmp = sum[layout];
+                if ( myData.sum && tmp ) {
+                    tmp = row_format(myData, tmp);
+                    if ( tmp ) { myRow += tmp; }
+                }
+                myRow += '</td>';
+            })
+            myRow += '<tr>';
+            $(`#${myTable.tblId} tbody`).append(myRow);
+        }
     }
 
 }
 
+function row_format(myData, tmp) {
+    // Evtl. Formatierung
+    if ( myData.type ) {
+        switch ( myData.type ) {
+            case 'N2': tmp = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(tmp); break;
+            case 'C2': tmp = new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 2}).format(tmp); break;
+            case 'C0': tmp = new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 0}).format(tmp); break;
+            case 'P0': tmp = new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 0, style: 'percent'}).format(tmp); break;
+            case 'P2': tmp = new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 2, style: 'percent'}).format(tmp); break;
+            case 'S': tmp = tmp ? tmp.toString().trim() : ''; break;
+            case 'bool': tmp = '<input type=checkbox ' + (tmp && (tmp === 1 || tmp === '1' || tmp === true || tmp.toString().trim() === 'J') ? 'checked' : '') + ">"; break;
+        }
+    }
+    return tmp;
+}
