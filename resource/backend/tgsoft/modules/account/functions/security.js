@@ -15,10 +15,26 @@ export function passport_initialize() {
                 .then(acc => {
                     if ( !acc || acc.id === 0 ) { return done(null, false, { message: 'no-user' }); }
                     if ( !acc.active ) { return done(null, false, { message: 'no-user'}); }
+                    /*
                     if (!TGSoft.helper.security.comparePassword(password, acc.hashedPassword)) {
+                        console.log('3');
                         return done(null, false, { message: 'front-password'} );
+                    } else {
+                        console.log(password + " | " + acc.hashedPassword);
                     }
+                    console.log('4');
                     return done(null, acc);
+                     */
+
+                    TGSoft.helper.security.comparePassword(password, acc.hashedPassword)
+                        .then(state => {
+                            if (state === false) {
+                                return done(null, false, {message: 'no-user'});
+                            } else {
+                                return done(null, acc);
+                            }
+                        })
+                        .catch ( () => { return done(null, false, { message: 'no-user'}); })
                 })
         }
         TGSoft.webServer.passport.use(new passport_local.Strategy({ usernameField: 'loginName' }, authenticateUser)); // If Authorisize -> get "loginname" from html formular and check Data

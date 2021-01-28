@@ -1,8 +1,28 @@
 $(function () {
-    // Setze Tablesorter
-    $('.tblsorter').tablesorter();
+});
 
-    $('.tblsorter_with_search').tablesorter({
+/**
+ * Generate a TableSorter from a normal Table
+ * @param {string} tableId ID of Table ( Without '#' !!! )
+ */
+function setTableSorter(tableId) {
+    let widgets = ['uitheme', 'zebra', 'filter'];
+    let widgets_options = {zebra: ["even", "odd"]}
+
+    $(`#${tableId}`).tablesorter({
+        theme: 'blue', // theme "jui" and "bootstrap" override the uitheme widget option in v2.7+
+        headerTemplate: '{content} {icon}', // needed to add icon for jui theme
+        widgets: widgets,
+        widgetOptions: widgets_options,
+    });
+}
+
+/**
+ * Generate a TableSorter from a normal Table with Search Field
+ * @param {string} tableId OD of Table ( Without '#' !!!)
+ */
+function setTableSorterWithSearch(tableId) {
+    $(`#${tableId}`).tablesorter({
         theme: 'blue',
         // hidden filter input/selects will resize the columns, so try to minimize the change
         widthFixed: true,
@@ -96,7 +116,8 @@ $(function () {
             filter_selectSourceSeparator: '|'
         }
     });
-});
+}
+
 
 function makeTableScroll(id, maxRows) {
     // Constant retrieved from server-side via JSP
@@ -175,8 +196,25 @@ function generateDynamicTable(myTable) {
     if ( myTable.rows && myTable.rows.length > 0 ) {
         $(`#${myTable.tblId} tbody tr`).remove();
         myTable.rows.forEach(currRow => {
-            if ( currRow.id > 0 ) {
+            if ( currRow.id > 0 || currRow.ID > 0 ) {
                 let myRow = '<tr>';
+
+                if ( myTable.rowClick ) {
+
+                    let params = '';
+                    if ( myTable.rowClickParams && myTable.rowClickParams.length > 0 ) {
+                        myTable.rowClickParams.forEach(myParam => {
+
+                            let curr = myTable.fields[myParam];
+                            if ( curr && curr.source !== '' ) {
+                                if ( params !== '' ) { params += ','; }
+                                params += eval('currRow.' + curr.source);
+                            }
+                        });
+                    }
+
+                    myRow = `<tr onclick=${myTable.rowClick}(${params})>`;
+                }
                 myTable.layout.forEach(layout => {
                     let myData = myTable.fields[layout];
                     if ( myData && myData.source ) {
@@ -207,18 +245,3 @@ function generateDynamicTable(myTable) {
 
 }
 
-/**
- * Generate a TableSorter from a normal Table
- * @param {string} tableName ID of Table ( Without '#' !!! )
- */
-function setTableSorter(tableName) {
-    let widgets = ['uitheme', 'zebra', 'filter'];
-    let widgets_options = {zebra: ["even", "odd"]}
-
-    $(`#${tableName}`).tablesorter({
-        theme: 'blue', // theme "jui" and "bootstrap" override the uitheme widget option in v2.7+
-        headerTemplate: '{content} {icon}', // needed to add icon for jui theme
-        widgets: widgets,
-        widgetOptions: widgets_options,
-    });
-}

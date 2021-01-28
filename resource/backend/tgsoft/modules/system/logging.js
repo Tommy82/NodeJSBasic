@@ -20,7 +20,7 @@ export default class Logging {
  * @param {object} error Error Object
  * @param {string} internCode Internal Code of the Error ( that can be identified by Developer! )
  */
-export function error(module, error, internCode = '[000]') {
+ function error(module, error, internCode = '[000]') {
     let currDateTime = helper.dateTime.getCurrentDateTime();
     console.log('------------------------------------');
     console.log(`new Error occurred in Module [${module}] @ `);
@@ -37,7 +37,7 @@ export function error(module, error, internCode = '[000]') {
  * @param {object} message MessageText or Object that should be Shown
  * @param {string} internCode Internal Code of the Error ( that can be identified by Developer! )
  */
-export function log(module, message, internCode = '[000]') {
+function log(module, message, internCode = '[000]') {
     let currDateTime = helper.dateTime.getCurrentDateTime();
     console.log('------------------------------------');
     console.log(`new Logging in Module [${module}] @ `);
@@ -53,7 +53,7 @@ export function log(module, message, internCode = '[000]') {
  * @param {string} module ModuleName
  * @param {object} message MessageText or Object that should be Shown. Object converts by JSON.stringify
  */
-export function simplyMessage(module, message) {
+function simplyMessage(module, message) {
     let currDateTime = helper.dateTime.getCurrentDateTime();
     console.log(`[${currDateTime.realString}] >> ${module} >> ${JSON.stringify(message)}`);
 }

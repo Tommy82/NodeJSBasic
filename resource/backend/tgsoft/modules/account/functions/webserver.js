@@ -84,7 +84,14 @@ function saveUserFromWebPage(req, res, userAccount) {
     userAccount.roleType = req.body["sel_role"].toLowerCase();
     userAccount.active = !!(req.body["chk_active"] && req.body["chk_active"].toLowerCase() === "on");
     userAccount.save()
-        .then(() => { res.redirect("/backend/users") })
+        .then(() => {
+            if ( req.body['txt_password'] && req.body['txt_password'] !== '' ) {
+                userAccount.password = req.body['txt_password'];
+                userAccount.updatePassword()
+                    .catch(err => { console.log(err); })
+                    .then(() => { res.redirect("/backend/users") });
+            } else { res.redirect("/backend/users") }
+        })
         .catch()
 
 }
