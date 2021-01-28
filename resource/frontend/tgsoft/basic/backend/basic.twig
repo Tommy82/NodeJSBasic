@@ -37,6 +37,13 @@
                         </ul>
                     </li>
                     {% block nav_afterbasic %}{% endblock %}
+                    <li class="submenu"><a href="#">Ich</a>
+                        <ul>
+                            {% block nav_me_before %}{% endblock %}
+                            <li><a href="/backend/users/me">Eigene Einstellungen</a></li>
+                            {% block nav_me_after %}{% endblock %}
+                        </ul>
+                    </li>
                     <li><a href="/backend/logout">Logout</a></li>
                 </ul>
             </nav>

@@ -28,6 +28,10 @@ TGSoft.webServer.app.get('/backend/logout', function(req, res) {
 /** WebServer -> UserList -> Get | Load UserList **/
 TGSoft.webServer.app.get('/backend/users', TGSoft.webServer.checkAuthenticated_Backend, fWebServer.userList );
 
+TGSoft.webServer.app.get('/backend/users/me', TGSoft.webServer.checkAuthenticated_Backend, fWebServer.siteMe );
+
+TGSoft.webServer.app.post('/backend/users/me', TGSoft.webServer.checkAuthenticated_Backend, fWebServer.updateMe);
+
 /** WebServer -> UserList -> Get | Load UserDetails **/
 TGSoft.webServer.app.get('/backend/users/details/:id', TGSoft.webServer.checkAuthenticated_Backend, fWebServer.userDetails);
 

@@ -1,0 +1,32 @@
+{% extends basicSite %}
+
+{% block content %}
+    <h1>Eigene Einstellungen:</h1>
+    <form method="post" action="">
+        <table id="tbl_me">
+            <tr>
+                <td><label for="txt_username">Username:</label></td>
+                <td><input type="text" value="{{ me.name }}" id="txt_username" name="txt_username" readonly class="default_style1"></td>
+                <td>(Kann nur in der Benutzerverwaltung geändert werden!)</td>
+            </tr>
+            <tr>
+                <td><label for="txt_password">Password:</label></td>
+                <td><input type="password" value="" name="txt_password" id="txt_password" class="default_style1"></td>
+                <td>{% if me.state == 1 %}Successful{% endif %}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Send" class="default_style1"></td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="/tgsoft/modules/accounts/assets/accounts.css">
+{% endblock %}
+
+{% block javascript_intern %}
+{% endblock %}

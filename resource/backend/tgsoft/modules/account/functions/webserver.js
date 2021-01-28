@@ -21,6 +21,43 @@ export function userList(req, res) {
 }
 
 /**
+ * Load Self-Settings - Site
+ * @param {object} req WebServer-Request
+ * @param {Object} res WebServer-Response
+ */
+export function siteMe(req, res) {
+    try {
+        let data = {
+            id: req.user.id,
+            name: req.user.userName,
+            role: req.user.roleType,
+            state: 0,
+        };
+        TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'accounts'], 'me.twig', { me: data });
+    } catch (err)  { TGSoft.webServer.toOutput(req, res, [], 'error.twig', {error: err}); }
+}
+
+export function updateMe(req, res) {
+    try {
+        let data = {
+            id: req.user.id,
+            name: req.user.userName,
+            role: req.user.roleType,
+            state: 1,
+        };
+
+        Account.getById(data.id)
+            .then(acc => {
+                acc.password = req.body['txt_password'];
+                acc.updatePassword()
+                    .then(() => { TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'accounts'], 'me.twig', { me: data }); })
+                    .catch(err => { TGSoft.webServer.toOutput(req, res, [], 'error.twig', {error: err}); })
+            })
+            .catch(err => { TGSoft.webServer.toOutput(req, res, [], 'error.twig', {error: err}); })
+    } catch (err)  { TGSoft.webServer.toOutput(req, res, [], 'error.twig', {error: err}); }
+}
+
+/**
  * Load UserDetails and give to Twig Template
  * @param {object} req WebServer-Request
  * @param {Object} res WebServer-Response
