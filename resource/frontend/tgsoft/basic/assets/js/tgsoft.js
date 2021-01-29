@@ -121,12 +121,12 @@ function setTableSorterWithSearch(tableId) {
 
 function makeTableScroll(id, maxRows) {
     // Constant retrieved from server-side via JSP
-    var table = document.getElementById(id);
-    var wrapper = table.parentNode;
-    var rowsInTable = table.rows.length;
-    var height = 0;
+    let table = document.getElementById(id);
+    let wrapper = table.parentNode;
+    let rowsInTable = table.rows.length;
+    let height = 0;
     if (rowsInTable > maxRows) {
-        for (var i = 0; i < maxRows; i++) {
+        for (let i = 0; i < maxRows; i++) {
             height += table.rows[i].clientHeight;
         }
         wrapper.style.height = height + "px";
@@ -197,7 +197,10 @@ function generateDynamicTable(myTable) {
     if ( myTable.rows && myTable.rows.length > 0 ) {
         $(`#${myTable.tblId} tbody tr`).remove();
         myTable.rows.forEach(currRow => {
-            if ( currRow.id > 0 || currRow.ID > 0 ) {
+            //if ( (currRow.id > 0 && currRow.id.toString().trim() !== '') ||( currRow.ID > 0 && currRow.ID.toString().trim() !== "" )) {
+            if ( (currRow.id && currRow.id.toString().trim() !== '' )
+                || ( currRow.ID && currRow.ID.toString().trim() !== '' )
+            ) {
                 let myRow = '<tr>';
 
                 if ( myTable.rowClick ) {
@@ -265,6 +268,7 @@ function generateDynamicTable(myTable) {
             })
             myRow += '<tr>';
             $(`#${myTable.tblId} tbody`).append(myRow);
+
         }
     }
 
@@ -281,6 +285,7 @@ function row_format(myData, tmp) {
             case 'P2': tmp = new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 2, style: 'percent'}).format(tmp); break;
             case 'S': tmp = tmp ? tmp.toString().trim() : ''; break;
             case 'bool': tmp = '<input type=checkbox ' + (tmp && (tmp === 1 || tmp === '1' || tmp === true || tmp.toString().trim() === 'J') ? 'checked' : '') + ">"; break;
+            default:  break;
         }
     }
     return tmp;
