@@ -6,5 +6,17 @@
 {% endblock %}
 
 {% block content %}
-Default Backend-Main Site
+    <div id="main_middle">
+        <div class="welcome">Willkommen</div>
+    </div>
+{% endblock %}
+
+{% block javascript_intern %}
+    {{ parent() }}
+    <script type="text/javascript" src="/tgsoft/modules/main/assets/main.js"></script>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="/tgsoft/modules/main/assets/main.css">
 {% endblock %}

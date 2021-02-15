@@ -118,7 +118,6 @@ function setTableSorterWithSearch(tableId) {
     });
 }
 
-
 function makeTableScroll(id, maxRows) {
     // Constant retrieved from server-side via JSP
     let table = document.getElementById(id);
@@ -271,6 +270,7 @@ function generateDynamicTable(myTable) {
 
         }
     }
+    $(`#${myTable.tblId}`).trigger('generated');
 
 }
 

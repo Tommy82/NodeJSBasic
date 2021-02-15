@@ -46,6 +46,7 @@
                     </li>
                     <li><a href="/backend/logout">Logout</a></li>
                 </ul>
+                <div id="header_me">User: {{ me.name }} [ID: {{ me.id }} | Role: {{ me.role }}]</div>
             </nav>
         {% endblock %}
         {% block header %}{% endblock %}

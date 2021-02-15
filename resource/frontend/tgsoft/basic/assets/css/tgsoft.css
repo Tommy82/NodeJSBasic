@@ -69,7 +69,7 @@ nav ul {
     padding: 0;
 }
 
-nav a {
+nav a, nav #header_me {
     display: block;
     color: #fff;
     text-decoration: none;
@@ -142,6 +142,12 @@ nav ul ul li.submenu a:after {
 nav ul ul li:last-child {
     border-bottom: none;
 }
-/** End: Navigation Menu */
 
+nav #header_me {
+    float: right;
+    padding-right: 1vw;
+    font-size: 16px;
+}
+
+/** End: Navigation Menu */
 

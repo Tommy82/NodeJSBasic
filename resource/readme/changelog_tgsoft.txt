@@ -1,1 +1,70 @@
-Changelogs
+v 0.1.0.5
+[Frontend - Header]
+-> Hinzufügen des angemeldeten Users im Header | Benutzernamens, ID und Rolle
+
+v 0.1.0.4
+[Alternative Twig Files]
+-> Hinzufügen von Alternativen Twig Files ( tgsoft_override )
+-> Benutzer kann nun eigenes Kennwort ändern
+
+[Javascript - Basics]
+-> setTableSorter [tableId] ( Setzt eine Tabelle als "jquery.tablesorter" )
+-> setTableSorterWithSearch [tableId] ( Setzt eine Tabelle als "jquery.tablesorter" mit Suchfunktion )
+-> makeTableScroll [id, maxRows] ( Setzt die Höhe der Tabelle so, das nur "maxRows" angezeigt werden )
+-> convertDate [date] ( Konvertiert einen Timestamp in ein lesbares Format )
+-> generateDynamicTable [object] ( Erstellt dynamisch eine Tabelle anhand von Layouts und Daten )
+-> row_format [] ( Formatiert eine Table-Zelle )
+
+v 0.1.0.3
+[Drucker]
+-> Ausdruck von HTML -> Printer
+-> Ausdruck von HTML -> PDF
+
+v 0.1.0.2
+[Rechte und Rollen]
+-> Hinzufügen von Rechten ( Einstellbar pro Modul! )
+-> Hinzufügen von Rollen ( Benutzer sind Rollenabhängig !)
+
+v 0.1.0.1
+[Datenbank]
+    -> Erstellen eines Datenbanksystems auf Basis von "typeorm"
+    -> Automatische Tabellensyncronisation via typeorm.EntitySchema
+    -> Einbinden diverser Datenbankabfragen
+    --> delete ( Löschen von Einträgen anhand des "documents" )
+    --> deleteById ( Löschen von Einträgen anhand einer ID )
+    --> find ( Laden von Einträgen anhand des "documents" )
+    --> findAll ( Laden aller Einträge einer Tabelle )
+    --> findById (Laden aller Einträge anhand von ID´s ) // ID kann dabei ein Array oder eine einzelne ID sein !
+    --> findOne ( laden eines einzelnen Eintrages anhand eines Zellenwertes )
+    --> insert ( Speichern eines neuen Eintrages )
+    --> select ( Laden bestimmter Spalten )
+    --> update ( Update eines bestimmtes Eintrages anhand einer ID )
+    --> upsert ( Insert / Update eines bestimmten Eintrages anhand eines Documents / Achtung! document.id = Referenzwert ! [0=Insert | >0 = Udate] )
+
+[Webserver]
+    -> Erstellen eines Express-Webservers
+    --> Templatesystem: Twig
+    --> Passwort Authenticate
+    --> Prüfen von "isAuthenticated"
+
+[Logging]
+    -> Erstellen eines LoggingSystems
+    --> error ( Anzeigen eines Fehlers in der Console ) [module:string, error:object, internCode:string{[000]}]
+    --> log ( Anzeige von Informationen in der Console )    [module:string, message: object, internCode:string{[000]}]
+    --> simplyMessage ( Einfache Anzeige von Informationen ) [module:string, message: object]
+
+[Hilfeklassen]
+    -> Converter
+    --> male_female [firstName: string] ( Errechnet das Geschlecht anhand des Vornamens )
+    -> DateTime
+    --> getCurrentDateTime ( Ausgabe des aktuellen Datums und Zeit in verschiedenen Formaten )
+    --> toRealString [date_ob] ( Ausgabe eines Timestamps als Anzeigefreundliches String )
+    --> toRealUTCString [date_ob] ( Ausgabe eines Timestamps als anzeigefreundlicher UTC - String )
+    -> Lists
+    --> asyncForEach [array, callback] ( Asyncrone verarbeitung von Listen )
+    -> Security
+    --> hashPassword (password) Verschlüsseln eines Kennwortes
+    --> comparePassword (password, hash) Prüfen ob verschlüsseltes Kennwort = korrektes Kennwort
+
+[Benutzer]
+    -> Hinzufügen einer Benutzerverwaltung

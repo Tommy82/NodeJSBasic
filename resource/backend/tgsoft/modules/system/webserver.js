@@ -99,6 +99,13 @@ export default class WebServer {
     toOutput(req, res, filePath, fileName, params) {
 
         if ( req.user && req.user.id > 0 ) {
+            params.me = {
+                id: req.user.id,
+                name: req.user.userName,
+                role: req.user.roleType,
+                active: req.user.active,
+            };
+
             req.user.filterByModuleName(Account.moduleName)
                 .catch ( err => { TGSoft.webServer.toOutput(req, res, [], 'error.twig', { error: err }); })
                 .then(twigRights => {
@@ -112,6 +119,13 @@ export default class WebServer {
             params.lstModuleRights = [];
             params.myModules = [];
             params.basicSite = TGSoft.settings.webServer.basicSite;
+            params.me = {
+                id: 0,
+                name: '',
+                role: '',
+                active: false,
+            };
+
             this.toTwigOutput(req, res, filePath, fileName, params);
         }
     }

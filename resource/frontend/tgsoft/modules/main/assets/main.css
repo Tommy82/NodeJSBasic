@@ -1,0 +1,9 @@
+
+.col1 { float: left; width: 10em; }
+
+#main_user {
+    width: 30em;
+    position: fixed;
+    top: 20vw;
+    left: 2vw;
+}

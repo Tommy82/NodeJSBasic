@@ -37,6 +37,11 @@ export function siteMe(req, res) {
     } catch (err)  { TGSoft.webServer.toOutput(req, res, [], 'error.twig', {error: err}); }
 }
 
+/**
+ * Speichert die eigenen Daten falls diese geändert wurden
+ * @param {object} req WebServer-Request
+ * @param {object} res WebServer-Response
+ */
 export function updateMe(req, res) {
     try {
         let data = {
@@ -132,3 +137,4 @@ function saveUserFromWebPage(req, res, userAccount) {
         .catch()
 
 }
+
