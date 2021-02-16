@@ -13,3 +13,9 @@ v 0.1.0.5
 --> date1 (dd.mm.yyyy)
 --> date2 ( yyyy-mm-dd)
 --> date3 ( yyyymmdd )
+-> New Table Style Options ( option: style )
+--> tbl-right
+--> tbl-middle
+--> tbl-left
+-> Automatische Style auswahl anhand der Formatierung ( kann mit "style" übeschrieben werden !)
+-> Format "bool" -> Checkbox ist nun "readonly"

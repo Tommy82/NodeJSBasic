@@ -244,8 +244,8 @@ function generateDynamicTable(myTable, setTableSorter = true) {
 
                         // Evtl. Formatierung
                         tmp = row_format(myData, tmp);
-
-                        myRow += `<td>${tmp}</td>`;
+                        myStyle = row_style(myData);
+                        myRow += `<td class="${myStyle}">${tmp}</td>`;
 
                     } else {
                         if ( myData && myData.html) {
@@ -292,11 +292,11 @@ function row_format(myData, tmp) {
         switch ( myData.type ) {
             case 'N2': tmp = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(tmp); break;
             case 'C2': tmp = new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 2}).format(tmp); break;
-            case 'C0': tmp = new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 0}).format(tmp); break;
-            case 'P0': tmp = new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 0, style: 'percent'}).format(tmp); break;
+            case 'C0': tmp = parseInt(tmp); tmp = new Intl.NumberFormat('de-DE').format(tmp); break;
+            case 'P0': tmp = parseInt(tmp); tmp = new Intl.NumberFormat('de-DE', { style: 'percent'}).format(tmp); break;
             case 'P2': tmp = new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 2, style: 'percent'}).format(tmp); break;
             case 'S': tmp = tmp ? tmp.toString().trim() : ''; break;
-            case 'bool': tmp = '<input type=checkbox ' + (tmp && (tmp === 1 || tmp === '1' || tmp === true || tmp.toString().trim() === 'J') ? 'checked' : '') + ">"; break;
+            case 'bool': tmp = '<input type=checkbox ' + (tmp && (tmp === 1 || tmp === '1' || tmp === true || tmp.toString().trim() === 'J') ? 'checked' : '') + " onclick='return false;'>"; break;
             case 'date': let myDate = convertDate(new Date(tmp)); tmp = myDate.sDate2; break;
             case 'date1': let myDate1 = convertDate(new Date(tmp)); tmp = myDate1.sDate; break;
             case 'date2': let myDate2 = convertDate(new Date(tmp)); tmp = myDate2.sDate2; break;
@@ -305,4 +305,28 @@ function row_format(myData, tmp) {
         }
     }
     return tmp;
+}
+
+function row_style(myData) {
+    let response = 'tbl-left';
+    if ( myData.style && myData.style !== '' ) { response = myData.style; }
+    else {
+        if ( myData.type ) {
+            switch ( myData.type ) {
+                case 'N2': response = 'tbl-right'; break;
+                case 'C2': response = 'tbl-right'; break;
+                case 'C0': response = 'tbl-right'; break;
+                case 'P0': response = 'tbl-right'; break;
+                case 'P2': response = 'tbl-right'; break;
+                case 'S': response = 'tbl-left'; break;
+                case 'bool': response = 'tbl-middle'; break;
+                case 'date': response = 'tbl-left'; break;
+                case 'date1': response = 'tbl-left'; break;
+                case 'date2': response = 'tbl-left'; break;
+                case 'date3': response = 'tbl-left'; break;
+                default: response = 'tbl-left'; break;
+            }
+        }
+    }
+    return response;
 }

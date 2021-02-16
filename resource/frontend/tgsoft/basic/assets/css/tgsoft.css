@@ -153,3 +153,6 @@ nav #header_me {
 
 /** End: Navigation Menu */
 
+.tbl-left { text-align: left; }
+.tbl-right { text-align: right; }
+.tbl-middle { text-align: center; }
