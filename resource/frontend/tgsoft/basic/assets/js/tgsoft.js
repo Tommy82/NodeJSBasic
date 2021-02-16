@@ -8,13 +8,15 @@ $(function () {
 function setTableSorter(tableId) {
     let widgets = ['uitheme', 'zebra', 'filter'];
     let widgets_options = {zebra: ["even", "odd"]}
-
-    $(`#${tableId}`).tablesorter({
-        theme: 'blue', // theme "jui" and "bootstrap" override the uitheme widget option in v2.7+
-        headerTemplate: '{content} {icon}', // needed to add icon for jui theme
-        widgets: widgets,
-        widgetOptions: widgets_options,
-    });
+    $(`#${tableId}`).tablesorter();
+    setTimeout(() => {
+        $(`#${tableId}`).tablesorter({
+            theme: 'blue', // theme "jui" and "bootstrap" override the uitheme widget option in v2.7+
+            headerTemplate: '{content} {icon}', // needed to add icon for jui theme
+            widgets: widgets,
+            widgetOptions: widgets_options,
+        });
+    }, 200)
 }
 
 /**
@@ -93,7 +95,7 @@ function setTableSorterWithSearch(tableId) {
             // Reset filter input when the user presses escape - normalized across browsers
             filter_resetOnEsc: true,
             // Use the $.tablesorter.storage utility to save the most recent filters (default setting is false)
-            filter_saveFilters: true,
+            filter_saveFilters: false,
             // Delay in milliseconds before the filter widget starts searching; This option prevents searching for
             // every character while typing and should make searching large tables faster.
             filter_searchDelay: 300,
@@ -176,9 +178,14 @@ function convertDate(date = null) {
  *     html: string             // If Source is undefined, you can set self html code. Parameters in Code can get by [[]]. ( Example: [[id]]) = rows[x].id )
  * }
  * @param {object} myTable Table Params
+ * @param setTableSorter
  */
-function generateDynamicTable(myTable) {
-    // Set Header
+function generateDynamicTable(myTable, setTableSorter = true) {
+
+    $(`#${myTable.tblId}`).trigger('destroy'); // Destroy TableSorter
+    let sum = [];
+
+    //#region Set Header
     let myHeader = '<tr>';
     myTable.layout.forEach(layout => {
         let myData = myTable.fields[layout];
@@ -187,10 +194,15 @@ function generateDynamicTable(myTable) {
         }
     })
     myHeader += '</tr>';
+    //#endregion Set Header
 
-    $(`#${myTable.tblId} thead tr`).remove();
-    $(`#${myTable.tblId} thead`).append(myHeader);
-    let sum = [];
+    //#region append Header
+    let headerLength = $(`#${myTable.tblId} thead tr`).length;
+    if ( headerLength === 0 ) {
+        $(`#${myTable.tblId} thead tr`).remove();
+        $(`#${myTable.tblId} thead`).append(myHeader);
+    }
+    //#endregion append Header
 
     // Set Body
     if ( myTable.rows && myTable.rows.length > 0 ) {
@@ -270,8 +282,8 @@ function generateDynamicTable(myTable) {
 
         }
     }
+    setTableSorterWithSearch(myTable.tblId);
     $(`#${myTable.tblId}`).trigger('generated');
-
 }
 
 function row_format(myData, tmp) {
