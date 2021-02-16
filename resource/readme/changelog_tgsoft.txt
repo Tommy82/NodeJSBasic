@@ -5,3 +5,6 @@ v 0.1.0.5
 
 [Main]
 -> Anzeige des aktuellen Changelogs ( Textfile, steuerbar über "settings" )
+
+[Global]
+-> Fix: Tablesorter | Filterfunktion | Filter wird neu gesetzt beim Reload
