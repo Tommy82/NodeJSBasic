@@ -8,3 +8,8 @@ v 0.1.0.5
 
 [Global]
 -> Fix: Tablesorter | Filterfunktion | Filter wird neu gesetzt beim Reload
+-> New Format Options
+--> date ( yyyy-mm-dd )
+--> date1 (dd.mm.yyyy)
+--> date2 ( yyyy-mm-dd)
+--> date3 ( yyyymmdd )

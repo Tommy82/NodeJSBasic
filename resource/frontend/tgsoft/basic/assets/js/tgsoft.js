@@ -297,6 +297,10 @@ function row_format(myData, tmp) {
             case 'P2': tmp = new Intl.NumberFormat('de-DE', { maximumSignificantDigits: 2, style: 'percent'}).format(tmp); break;
             case 'S': tmp = tmp ? tmp.toString().trim() : ''; break;
             case 'bool': tmp = '<input type=checkbox ' + (tmp && (tmp === 1 || tmp === '1' || tmp === true || tmp.toString().trim() === 'J') ? 'checked' : '') + ">"; break;
+            case 'date': let myDate = convertDate(new Date(tmp)); tmp = myDate.sDate2; break;
+            case 'date1': let myDate1 = convertDate(new Date(tmp)); tmp = myDate1.sDate; break;
+            case 'date2': let myDate2 = convertDate(new Date(tmp)); tmp = myDate2.sDate2; break;
+            case 'date3': let myDate3 = convertDate(new Date(tmp)); tmp = myDate3.sDate3; break;
             default:  break;
         }
     }
