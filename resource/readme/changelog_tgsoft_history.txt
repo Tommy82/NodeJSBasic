@@ -1,3 +1,25 @@
+v 0.1.0.5
+[Frontend - Header]
+-> Hinzufügen des angemeldeten Users im Header | Benutzernamens, ID und Rolle
+-> Fixed Header
+
+[Main]
+-> Anzeige des aktuellen Changelogs ( Textfile, steuerbar über "settings" )
+
+[Global]
+-> Fix: Tablesorter | Filterfunktion | Filter wird neu gesetzt beim Reload
+-> New Format Options
+--> date ( yyyy-mm-dd )
+--> date1 (dd.mm.yyyy)
+--> date2 ( yyyy-mm-dd)
+--> date3 ( yyyymmdd )
+-> New Table Style Options ( option: style )
+--> tbl-right
+--> tbl-middle
+--> tbl-left
+-> Automatische Style auswahl anhand der Formatierung ( kann mit "style" übeschrieben werden !)
+-> Format "bool" -> Checkbox ist nun "readonly"
+
 v 0.1.0.4
 [Alternative Twig Files]
 -> Hinzufügen von Alternativen Twig Files ( tgsoft_override )

@@ -271,7 +271,7 @@ function generateDynamicTable(myTable, setTableSorter = true) {
                 let myData = myTable.fields[layout];
                 myRow += '<td>';
                 let tmp = sum[layout];
-                if ( myData.sum && tmp ) {
+                if ( myData && myData.sum && tmp ) {
                     tmp = row_format(myData, tmp);
                     if ( tmp ) { myRow += tmp; }
                 }

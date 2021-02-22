@@ -1,21 +1,4 @@
-v 0.1.0.5
-[Frontend - Header]
--> Hinzufügen des angemeldeten Users im Header | Benutzernamens, ID und Rolle
--> Fixed Header
+v 0.1.0.6
 
-[Main]
--> Anzeige des aktuellen Changelogs ( Textfile, steuerbar über "settings" )
-
-[Global]
--> Fix: Tablesorter | Filterfunktion | Filter wird neu gesetzt beim Reload
--> New Format Options
---> date ( yyyy-mm-dd )
---> date1 (dd.mm.yyyy)
---> date2 ( yyyy-mm-dd)
---> date3 ( yyyymmdd )
--> New Table Style Options ( option: style )
---> tbl-right
---> tbl-middle
---> tbl-left
--> Automatische Style auswahl anhand der Formatierung ( kann mit "style" übeschrieben werden !)
--> Format "bool" -> Checkbox ist nun "readonly"
+Fix: Fehlende toast.js.map hinzugefügt
+Fix: GenerateDymamicTable -> Sum prüft nun üb Tabelle und Daten vorhanden
