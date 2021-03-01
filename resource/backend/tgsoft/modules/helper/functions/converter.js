@@ -1,5 +1,5 @@
 export default class Converter {
-    static male_female = male_female;
+    male_female = male_female;
 }
 
 /**

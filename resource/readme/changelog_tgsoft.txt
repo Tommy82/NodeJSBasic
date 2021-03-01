@@ -2,3 +2,4 @@ v 0.1.0.6
 
 Fix: Fehlende toast.js.map hinzugefügt
 Fix: GenerateDymamicTable -> Sum prüft nun üb Tabelle und Daten vorhanden
+Fix: Wenn keine Daten, wird bei "generatedynamictable" der tbody nun korrekt gelöscht

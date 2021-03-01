@@ -24,9 +24,15 @@ import {TGSoft} from "../tgsoft/tgsoft.js";
 
 /** WebServer Class **/
 export default class WebServer {
-    /** {object} Express (WebServer) App **/
+    /** 
+     * Express Webserver
+     * @type express
+     */
     app = undefined;
-    /** {boolean} False = WebServer is NOT Ready | True = WebServer is Ready **/
+    
+    /** False = WebServer is NOT Ready | True = WebServer is Ready 
+     * @type boolean
+     **/
     isOnline = false;
 
     /**
@@ -34,32 +40,37 @@ export default class WebServer {
      * @type {object}
      */
     passport = undefined;
+    
+    /**
+     * Directories of Backend, Frontend, ...
+     * @type Directories
+     */
     directories = undefined;
 
     /** Instantiate a new WebServer Instance */
     constructor(coreEvents, directories, settings) {
         this.directories = directories;
-        this.app = express();                                                       // Initialize Express Webserver
-        if (settings.webServer.templateSystem === 'twig') {                        // If Template System equals Twig ...
-            this.app.engine('twig', Twig.__express);                                // ... set Twig to Express as default Engine
-            this.app.set('view-engine', 'twig');                                    // ... set twig as View Engine
-            this.app.set('views', directories.frontend);                            // ... set Frontend Directory
-            this.app.set('twig options', {});                                       // ... set Twig Options
+        this.app = express();                                           // Initialize Express Webserver
+        if (settings.webServer.templateSystem === 'twig') {             // If Template System equals Twig ...
+            this.app.engine('twig', Twig.__express);                    // ... set Twig to Express as default Engine
+            this.app.set('view-engine', 'twig');                        // ... set twig as View Engine
+            this.app.set('views', directories.frontend);                // ... set Frontend Directory
+            this.app.set('twig options', {});                           // ... set Twig Options
         }
-        this.app.set('view options', {layout: false});                                     // Set View Options
-        this.app.use(express.static(directories.frontend));    // Set Frontend Static Directory ( needed for "include files" like 'js', 'css', 'png' ...)
-        this.app.use(express.urlencoded({extended: false}));                              // Set Url Encoding
-        this.app.use(flash());                                                              // Include Flash to set direct Messages on HTML Form
-        this.app.use(session({                                                      // Set WebServer Session
+        this.app.set('view options', {layout: false});                  // Set View Options
+        this.app.use(express.static(directories.frontend));             // Set Frontend Static Directory ( needed for "include files" like 'js', 'css', 'png' ...)
+        this.app.use(express.urlencoded({extended: false}));            // Set Url Encoding
+        this.app.use(flash());                                          // Include Flash to set direct Messages on HTML Form
+        this.app.use(session({                                          // Set WebServer Session
             secret: settings.webServer.sessionKey,
             resave: false,
             saveUninitialized: false
         }));
-        this.app.use(methodOverride('_method'));                             // Allow Method Override
-        this.app.listen(settings.webServer.port);                                   // Start WebServer with Port given in Settings File
-        this.isOnline = true;                                                       // Set Internal Parameter to true, so Modules that initialize later can see that Server is online
+        this.app.use(methodOverride('_method'));                        // Allow Method Override
+        this.app.listen(settings.webServer.port);                       // Start WebServer with Port given in Settings File
+        this.isOnline = true;                                           // Set Internal Parameter to true, so Modules that initialize later can see that Server is online
         console.log(`[TGSoft] - WebServer is Ready and listen on Port [${settings.webServer.port}]`)
-        coreEvents.emit('core:webServer:connected');                                // Tell everyone that Server is online and connected
+        coreEvents.emit('core:webServer:connected');                    // Tell everyone that Server is online and connected
     }
 
     /**
@@ -131,12 +142,12 @@ export default class WebServer {
     }
 
     /**
-     *
-     * @param req
-     * @param res
-     * @param filePath
-     * @param fileName
-     * @param params
+     * Send Data to Twig Template
+     * @param {object} req  Website-Request
+     * @param {object} res  Website-Response
+     * @param {Array} filePath Path to File ( without Filename! )
+     * @param {string} fileName Filename (without Path)
+     * @param {Array} params Params for Twig Template
      */
     toTwigOutput(req, res, filePath, fileName, params) {
         let _fileName = this.directories.frontend;
@@ -162,3 +173,4 @@ export default class WebServer {
 
     }
 }
+

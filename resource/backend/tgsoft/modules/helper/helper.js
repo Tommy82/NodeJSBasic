@@ -12,10 +12,10 @@ import { default as Security } from './functions/security.js';
 import { default as Converter } from './functions/converter.js';
 
 export default class Helper {
-    static dateTime = DateTime;
-    static lists = Lists;
-    static security = Security;
-    static converter = Converter;
+    dateTime = new DateTime();
+    lists = new Lists();
+    security = new Security();
+    converter = new Converter();
 }
 
 

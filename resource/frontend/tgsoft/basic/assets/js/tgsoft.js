@@ -205,8 +205,8 @@ function generateDynamicTable(myTable, setTableSorter = true) {
     //#endregion append Header
 
     // Set Body
+    $(`#${myTable.tblId} tbody tr`).remove();
     if ( myTable.rows && myTable.rows.length > 0 ) {
-        $(`#${myTable.tblId} tbody tr`).remove();
         myTable.rows.forEach(currRow => {
             //if ( (currRow.id > 0 && currRow.id.toString().trim() !== '') ||( currRow.ID > 0 && currRow.ID.toString().trim() !== "" )) {
             if ( (currRow.id && currRow.id.toString().trim() !== '' )
@@ -240,6 +240,14 @@ function generateDynamicTable(myTable, setTableSorter = true) {
                             if ( !curr ) { curr = 0; sum.push(layout); }
                             if (!tmp) { tmp = 0; }
                             sum[layout] = curr + parseFloat(tmp);
+                        }
+
+                        if ( myData.override && myData.override.trim() !== '' ) {
+                            let myOverride = myData.override;
+                            myTable.layout.forEach(layout1 => {
+                                myOverride = myOverride.replaceAll(`[[${layout1.trim()}]]`, tmp);
+                            })
+                            tmp = eval(myOverride);
                         }
 
                         // Evtl. Formatierung

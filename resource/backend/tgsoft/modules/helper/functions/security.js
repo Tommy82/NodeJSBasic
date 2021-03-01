@@ -9,8 +9,8 @@
 import bcrypt from 'bcryptjs';
 
 export default class Security {
-    static hashPassword = hashPassword;
-    static comparePassword = comparePassword;
+    hashPassword = hashPassword;
+    comparePassword = comparePassword;
 }
 
 /**

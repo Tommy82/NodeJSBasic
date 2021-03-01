@@ -1,7 +1,7 @@
 
 /** Class for List Functions **/
 export default class Lists {
-    static asyncForEach = asyncForEach;
+    asyncForEach = asyncForEach;
 }
 
 /**

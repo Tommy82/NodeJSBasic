@@ -1,15 +1,15 @@
 /** Class fpr DateTime Functions */
 export default class DateTime {
-    static getCurrentDateTime = getCurrentDateTime;
-    static toRealString = toRealString;
-    static toRealUTCString = toRealUTCString;
+    getCurrentDateTime = getCurrentDateTime;
+    toRealString = toRealString;
+    toRealUTCString = toRealUTCString;
 }
 
 /**
  * get the current DateTime and UTC-DateTime
  * @return {{utcMonth: number, utcMinutes: number, year: number, minutes: number, utcYear: number, utcDay: number, seconds: number, month: number, hour: number, utcSeconds: number, utcMilliSeconds: number, day: number, utcHours: number, milliSeconds: number}}
  */
-export function getCurrentDateTime() {
+function getCurrentDateTime() {
     let date_ob = new Date();
 
     return {
@@ -48,7 +48,7 @@ export function getCurrentDateTime() {
  * @param {object} date_ob Timestamp
  * @return {string} Real Timestamp - DateString
  */
-export function toRealString(date_ob) {
+function toRealString(date_ob) {
     let date = ("0" + date_ob.getDate()).slice(-2);
     let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
     let year = date_ob.getFullYear();
@@ -63,7 +63,7 @@ export function toRealString(date_ob) {
  * @param date_ob
  * @return {string}
  */
-export function toRealUTCString(date_ob) {
+function toRealUTCString(date_ob) {
     let date = ("0" + date_ob.getUTCDate()).slice(-2);
     let month = ("0" + (date_ob.getUTCMonth() + 1)).slice(-2);
     let year = date_ob.getUTCFullYear();
