@@ -13,6 +13,9 @@ import { default as Logging } from '../system/logging.js';
 import Rights from "../rights/classes/rights.js";
 import { default as Printer } from '../printer/classes/printer.js';
 
+import { settings as ent_settings } from '../system/entities.js';
+import { default as cSettings } from '../system/settings.js';
+
 
 /** @type TGSoftClass */
 let TGSoft;
@@ -120,7 +123,7 @@ class TGSoftClass {
      * **/
     async init() {
         console.log('[TGSoft] - Initialize Modules')
-        let entityArray = [];                                                           // Temporary EntityArray to catch all Entities
+        let entityArray = [ent_settings];                                                           // Temporary EntityArray to catch all Entities
         if ( this.modules && this.modules.length > 0 ) {
             await this.helper.lists.asyncForEach(this.modules, async(module) => {
                 let moduleName = 'undefined';
@@ -192,7 +195,8 @@ class TGSoftClass {
             });
         }
         //#endregion Handle Module Rights
-
+        
+        await cSettings.handle().catch(err => { console.log(err); })
     }
 
     /**
