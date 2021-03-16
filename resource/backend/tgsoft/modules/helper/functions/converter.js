@@ -2,8 +2,7 @@ export default class Converter {
     male_female = male_female;
 }
 
-/**
- * Calculate the "Male" or "Female" from the FirstName
+/** Calculate the "Male" or "Female" from the FirstName
  * @param {string} firstName FirstName
  */
 function male_female(firstName) {

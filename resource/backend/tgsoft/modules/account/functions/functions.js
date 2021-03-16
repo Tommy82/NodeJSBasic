@@ -1,8 +1,7 @@
 import { TGSoft } from '../../tgsoft/tgsoft.js';
 import * as fDatabase from '../database/functions.js';
 
-/**
- * Update UserPassword
+/** Update UserPassword
  * @return {Promise<boolean>} true = Password Changed | false = Password not Changed
  */
 export async function updatePassword() {
@@ -22,8 +21,7 @@ export async function updatePassword() {
     })
 }
 
-/**
- * Check if a User allowed to Do Action
+/** Check if a User allowed to Do Action
  * @param {string} moduleName Name of the Module
  * @param {string} rightName Name of the Right
  * @return {boolean} true = User Allowed | false = User not Allowed
@@ -35,8 +33,7 @@ export function checkIfAllowed(moduleName, rightName) {
     } else { return false; }
 }
 
-/**
- * Filter all Rights from specific ModuleName
+/** Filter all Rights from specific ModuleName
  * @param {string} moduleName Name of Module
  * @return {Promise<[]>} Array[key] = bool
  */

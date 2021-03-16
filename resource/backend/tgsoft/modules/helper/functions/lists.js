@@ -4,8 +4,7 @@ export default class Lists {
     asyncForEach = asyncForEach;
 }
 
-/**
- * Async ForEach Loop
+/** Async ForEach Loop
  * @param {[]} array Array that should be looped
  * @param {object} callback Single Item of Array
  * @return {Promise<void>}

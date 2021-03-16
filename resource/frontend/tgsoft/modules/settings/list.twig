@@ -1,0 +1,30 @@
+{% extends basicSite %}
+
+{% block navigation_main %}{{ parent() }}{% endblock %}
+
+{% block content %}
+    {% if ( myModules.TGSoft_Roles.add == 1 ) %}
+        {% if ( myModules.TGSoft_Account.add == 1 ) %}
+            <a href="/backend/roles/details/0">
+                <button class="btnAdd default_style1" roleId="0">Neu anlegen</button>
+            </a>
+        {% endif %}
+    {% endif %}
+
+    <table id="tbl_roles" class="tblsorter tablesorter-blue">
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="/tgsoft/modules/rights/assets/roles.css">
+{% endblock %}
+
+{% block javascript_intern %}
+    {{ parent() }}
+    <script type="text/javascript" src="/tgsoft/modules/rights/assets/roles.js"></script>
+{% endblock %}

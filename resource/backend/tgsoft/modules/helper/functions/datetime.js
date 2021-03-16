@@ -5,8 +5,7 @@ export default class DateTime {
     toRealUTCString = toRealUTCString;
 }
 
-/**
- * get the current DateTime and UTC-DateTime
+/** get the current DateTime and UTC-DateTime
  * @return {{utcMonth: number, utcMinutes: number, year: number, minutes: number, utcYear: number, utcDay: number, seconds: number, month: number, hour: number, utcSeconds: number, utcMilliSeconds: number, day: number, utcHours: number, milliSeconds: number}}
  */
 function getCurrentDateTime() {
@@ -43,8 +42,7 @@ function getCurrentDateTime() {
     }
 }
 
-/**
- * Convert the Timestamp to a real DateTime String with Format "yyyy-MM-dd hh:mm:ss"
+/** Convert the Timestamp to a real DateTime String with Format "yyyy-MM-dd hh:mm:ss"
  * @param {object} date_ob Timestamp
  * @return {string} Real Timestamp - DateString
  */
@@ -58,8 +56,7 @@ function toRealString(date_ob) {
     return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
 }
 
-/**
- * Convert the Timestamp to a real UTC DateTime String with Format "yyyy-MM-dd hh:mm:ss"
+/** Convert the Timestamp to a real UTC DateTime String with Format "yyyy-MM-dd hh:mm:ss"
  * @param date_ob
  * @return {string}
  */

@@ -1,5 +1,6 @@
 import * as fHtml from '../functions/html.js';
 
+/** Printer Class */
 export default class Printer {
 
     static format = {

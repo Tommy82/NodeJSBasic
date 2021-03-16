@@ -27,14 +27,12 @@ class AccountInstall {
     /** Name of Module **/
     moduleName = Account.moduleName;
 
-    /**
-     * Initialize of Install Module. Execute before Database Install !
+    /** Initialize of Install Module. Execute before Database Install !
      * @return {Promise<void>}
      */
     async init() { }
 
-    /**
-     * Install this Module
+    /** Install this Module
      * @return {Promise<void>}
      */
     async install() {
@@ -54,8 +52,7 @@ class AccountInstall {
         }
     }
 
-    /**
-     * Start Module!
+    /** Start Module!
      * Attention! Instance of this Module was cleared after start. If start some Parameters, write it in the Main Function as static!
      * @return {Promise<void>}
      */

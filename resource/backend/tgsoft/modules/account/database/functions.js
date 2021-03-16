@@ -1,8 +1,7 @@
 import { TGSoft} from "../../tgsoft/tgsoft.js";
 import { default as Account } from '../classes/account.js';
 
-/**
- * Save the current AccountData
+/** Save the current AccountData
  * Attention! Must be a prototype of "Account"
  * @return {Promise<object>} Saved Database-Data
  */
@@ -19,8 +18,7 @@ export async function save() {
     })
 }
 
-/**
- * Load Account by ID or ID´s
+/** Load Account by ID or ID´s
  * @param {[int]} accountId Internal AccountID
  * @return {Promise<Account>}
  */
@@ -36,8 +34,7 @@ export async function getById(accountId) {
     })
 }
 
-/**
- * Load one(!) Account by Username
+/** Load one(!) Account by Username
  * @param {string} username Login- / Username of Account
  * @return {Promise<Account>}
  */
@@ -49,8 +46,7 @@ export async function getByUsername(username) {
     })
 }
 
-/**
- * Update partial Data
+/** Update partial Data
  * @param {int} id Internal Account ID
  * @param {Object} data
  * @return {Promise<[Object]>} Updated Data
@@ -63,8 +59,7 @@ export async function updatePartialData(id, data) {
     })
 }
 
-/**
- * Load all Active Accounts from Database
+/** Load all Active Accounts from Database
  * @param {boolean} toClass false = returns as array of Object | true = returns List of Account
  * @return {Promise<[Account]>} Array of DB Entries or Account
  */
@@ -79,8 +74,7 @@ export async function getAllActive(toClass = false) {
     })
 }
 
-/**
- * Load all Accounts from Database
+/** Load all Accounts from Database
  * @param {boolean} toClass false = returns as array of Object | true = returns List of Account
  * @return {Promise<[Account]>} Array of DB Entries or Account
  */
@@ -95,8 +89,7 @@ export async function getAll(toClass = false) {
     })
 }
 
-/**
- * Convert the Database-Record to Account-Class
+/** Convert the Database-Record to Account-Class
  * @param {object} record DB:accounts
  * @return {Account}
  */
@@ -112,8 +105,7 @@ function createClassFromDB(record) {
     return response;
 }
 
-/**
- * Convert the List of Database-Records to List of Array-Classes
+/** Convert the List of Database-Records to List of Array-Classes
  * @param {[Account]} lstRecords
  * @return {null|[]}
  */

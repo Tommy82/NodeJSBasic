@@ -24,7 +24,9 @@ export default class Account {
     /** UserRoles as Array / myRole[moduleName][rightName] : [0/1] **/
     myRole = undefined;
 
+    /** Save the current AccountData */
     save = fDatabase.save;
+    
     updatePassword = fFunctions.updatePassword;
     checkIfAllowed = fFunctions.checkIfAllowed;
     filterByModuleName = fFunctions.filterByModuleName;

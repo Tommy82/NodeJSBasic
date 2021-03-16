@@ -4,6 +4,8 @@ import passport_local from 'passport-local';
 import { default as cAccount } from '../classes/account.js';
 import { default as cRole } from '../../rights/classes/roles.js';
 
+/** Initialize Passport Authenticate
+ */
 export function passport_initialize() {
     if ( TGSoft.webServer.passport === undefined ) {
         TGSoft.webServer.passport = new passport.Authenticator();

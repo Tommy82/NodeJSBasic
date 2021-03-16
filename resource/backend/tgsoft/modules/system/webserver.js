@@ -49,6 +49,12 @@ export default class WebServer {
 
     /** Instantiate a new WebServer Instance */
     constructor(coreEvents, directories, settings) {
+        this.router = new express.Router();
+        this.router.use(() => {}); // General middleware
+        this.router.get('/', () => {})
+        //this.router.get('/route2', () => {})
+        //this.router.post('/route2', () => {})
+        
         this.directories = directories;
         this.app = express();                                           // Initialize Express Webserver
         if (settings.webServer.templateSystem === 'twig') {             // If Template System equals Twig ...
@@ -57,6 +63,7 @@ export default class WebServer {
             this.app.set('views', directories.frontend);                // ... set Frontend Directory
             this.app.set('twig options', {});                           // ... set Twig Options
         }
+        this.app.use('/test', this.router);
         this.app.set('view options', {layout: false});                  // Set View Options
         this.app.use(express.static(directories.frontend));             // Set Frontend Static Directory ( needed for "include files" like 'js', 'css', 'png' ...)
         this.app.use(express.urlencoded({extended: false}));            // Set Url Encoding

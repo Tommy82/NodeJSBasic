@@ -44,5 +44,15 @@ export default class Settings {
         })
     }
 
+    static async toSite(req, res) {
+        TGSoft.webServer.toOutput(req, res, ['tgsoft', 'modules', 'settings'], 'list.twig', {  });
+    }
+
+    static async json_All(req, res) {
+        Settings.db_getAll()
+            .then(lstData => { return res.json({success: true, data: lstData}); })
+            .catch(err => { return res.json({success: false, error: err}); })
+    }
+
 }
 

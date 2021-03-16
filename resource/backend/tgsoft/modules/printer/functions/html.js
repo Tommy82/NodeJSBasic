@@ -2,8 +2,7 @@ import { default as puppeteer } from 'puppeteer';
 import ptp from 'pdf-to-printer';
 import { v4 as uuidv4 } from 'uuid';
 
-/**
- * Generate a PDF File from Html Website
+/** Generate a PDF File from Html Website
  * @param {string} url Website
  * @param {string} path Path, where the PDF should be saved
  * @param {string} format
@@ -21,8 +20,7 @@ export async function toPdf(url, path, format) {
     })
 }
 
-/**
- * Generate a html File and Print it on Printer
+/** Generate a html File and Print it on Printer
  * @param {string} url Website
  * @param {Printer.format} format
  * @param {string} printer Name of Printer

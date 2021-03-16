@@ -117,7 +117,7 @@ class TGSoftClass {
         this.directories.export = path.join(this.directories.root, 'resource', 'export');       // Export Source
     }
 
-    /**
+    /** Global Module Initializer
      * - Init all Modules
      * - Create Database with Entities of all Modules
      * **/
@@ -159,7 +159,7 @@ class TGSoftClass {
         this.database = new DBConnection(entityArray, this.events, this.settings);      // Start Database
     }
 
-    /**
+    /** Global Module Installer
      * - Install all Modules
      * - Check all Rights
      */
@@ -199,7 +199,7 @@ class TGSoftClass {
         await cSettings.handle().catch(err => { console.log(err); })
     }
 
-    /**
+    /** Global Module Starter
      * Start Modules and Load Parameters on Serverstart
      */
     async start() {
@@ -216,8 +216,7 @@ class TGSoftClass {
         })
     }
 
-    /**
-     * Add a module to Global Modules to init and install the Module.
+    /** Add a module to Global Modules to init and install the Module.
      * After Finish start all Modules, the Array was cleared to clean Resources
      * @param module
      */

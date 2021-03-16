@@ -3,9 +3,8 @@ import path from 'path';
 import { TGSoft } from './modules/tgsoft/tgsoft.js'
 import * as fSecurity from './modules/account/functions/security.js';
 
-/**
- * Importieren einer bestimmten Datei
- * @param {string} fileName 
+/** Import specific File
+ * @param {string} fileName Filename that should be imported
  */
 async function loadFiles(fileName) {
     return new Promise(async (resolve, reject) => {
@@ -22,9 +21,8 @@ async function loadFiles(fileName) {
     })
 }
 
-/**
- * Laden aller Unterverzeichnisse aus dem angegebenem Verzeichnis
- * @param {string} directory Verzeichnisname
+/** Load all lower Directories of Directory
+ * @param {string} directory Directory
  */
 async function loadDirectories(directory) {
     return new Promise(async (resolve, reject) => {
@@ -44,10 +42,10 @@ async function loadDirectories(directory) {
     })
 }
 
-/** EventListener: Datenbank ist Verbunden */
+/** EventListener: throws when Database is connected */
 TGSoft.events.on('core:database:connected', async () => {
-    await TGSoft.install();
-    await TGSoft.start();
+    await TGSoft.install(); // Install Modules
+    await TGSoft.start();   // Start Modules
     console.log('[TGSoft] - Ready to use, enjoy it!')
 });
 
@@ -56,8 +54,8 @@ fSecurity.passport_initialize();
 
 
 // Startfunktion
-loadDirectories('./resource/backend')       // Lade alle Unterverzeichnisse und binde diese ein
-    .then(() => { TGSoft.init(); })         // Initialisiere alle Module
-    .catch(err => { console.error(err); })  // Falls Fehler, beende
+loadDirectories('./resource/backend')       // Load all Lower Directories
+    .then(() => { TGSoft.init(); })         // Iitialize Modules
+    .catch(err => { console.error(err); })  // If any Error, throw it
 
     

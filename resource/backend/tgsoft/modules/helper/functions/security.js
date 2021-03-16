@@ -1,11 +1,3 @@
-/**
- * Security Functions
- *
- * @author Thomas Göttsching
- * @version 1.0
- * @revision: 1
- */
-
 import bcrypt from 'bcryptjs';
 
 export default class Security {
@@ -13,8 +5,7 @@ export default class Security {
     comparePassword = comparePassword;
 }
 
-/**
- * Encrypt a Password by bcrypt and returns the Hash
+/** Encrypt a Password by bcrypt and returns the Hash
  * @param {string} password Normal Password
  * @return {Promise<string>} crypt Password | Hash
  */
@@ -26,8 +17,7 @@ async function hashPassword(password) {
     })
 }
 
-/**
- * Check if Password is correct
+/** Check if Password is correct
  * @param {string} password Normal Password that User inputs
  * @param {string} hash Crypt Password from Database
  * @return {Promise<boolean>}
