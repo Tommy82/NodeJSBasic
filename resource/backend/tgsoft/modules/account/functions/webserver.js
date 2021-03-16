@@ -3,8 +3,7 @@ import * as fDatabase from '../database/functions.js';
 import Account from "../classes/account.js";
 import Roles from "../../rights/classes/roles.js";
 
-/**
- * Load UserList and give to Twig Template
+/** Load UserList and give to Twig Template
  * @param {object} req WebServer-Request
  * @param {Object} res WebServer-Response
  */
@@ -20,8 +19,7 @@ export function userList(req, res) {
     }
 }
 
-/**
- * Load Self-Settings - Site
+/** Load Self-Settings - Site
  * @param {object} req WebServer-Request
  * @param {Object} res WebServer-Response
  */
@@ -37,8 +35,7 @@ export function siteMe(req, res) {
     } catch (err)  { TGSoft.webServer.toOutput(req, res, [], 'error.twig', {error: err}); }
 }
 
-/**
- * Speichert die eigenen Daten falls diese geändert wurden
+/** Speichert die eigenen Daten falls diese geändert wurden
  * @param {object} req WebServer-Request
  * @param {object} res WebServer-Response
  */
@@ -62,8 +59,7 @@ export function updateMe(req, res) {
     } catch (err)  { TGSoft.webServer.toOutput(req, res, [], 'error.twig', {error: err}); }
 }
 
-/**
- * Load UserDetails and give to Twig Template
+/** Load UserDetails and give to Twig Template
  * @param {object} req WebServer-Request
  * @param {Object} res WebServer-Response
  */
@@ -94,8 +90,7 @@ export function userDetails(req, res) {
     }
 }
 
-/**
- * Save UserDetails and redirect to UserList
+/** Save UserDetails and redirect to UserList
  * @param {object} req WebServer-Request
  * @param {object} res WebServer-Response
  */
@@ -115,8 +110,7 @@ export function postUserDetails(req, res) {
     }
 }
 
-/**
- * Get Parameters from WebServer-Request and Save User
+/** Get Parameters from WebServer-Request and Save User
  * @param {object} req WebServer-Request
  * @param {object} res WebServer-Response
  * @param {Account} userAccount Current UserAccount
