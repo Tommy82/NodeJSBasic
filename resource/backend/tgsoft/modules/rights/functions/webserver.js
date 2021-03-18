@@ -70,7 +70,7 @@ export async function post_roles_details(req, res) {
         await currRole.save()
 
         //get_roles_details(req, res).catch();
-        res.redirect("/backend/roles")
+        res.redirect(TGSoft.webServer.prefix + "/backend/roles")
     } else {
         TGSoft.webServer.toOutput(req, res, [], 'access_denied.twig', {module: Roles.moduleName, right: "change" });
     }

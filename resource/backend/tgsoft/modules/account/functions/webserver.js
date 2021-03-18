@@ -125,8 +125,8 @@ function saveUserFromWebPage(req, res, userAccount) {
                 userAccount.password = req.body['txt_password'];
                 userAccount.updatePassword()
                     .catch(err => { console.log(err); })
-                    .then(() => { res.redirect("/backend/users") });
-            } else { res.redirect("/backend/users") }
+                    .then(() => { res.redirect(TGSoft.webServer.prefix + "/backend/users") });
+            } else { res.redirect(TGSoft.webServer.prefix + "/backend/users") }
         })
         .catch()
 
