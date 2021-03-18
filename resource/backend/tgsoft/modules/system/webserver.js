@@ -49,12 +49,6 @@ export default class WebServer {
 
     /** Instantiate a new WebServer Instance */
     constructor(coreEvents, directories, settings) {
-        this.router = new express.Router();
-        this.router.use(() => {}); // General middleware
-        this.router.get('/', () => {})
-        //this.router.get('/route2', () => {})
-        //this.router.post('/route2', () => {})
-        
         this.directories = directories;
         this.app = express();                                           // Initialize Express Webserver
         if (settings.webServer.templateSystem === 'twig') {             // If Template System equals Twig ...
@@ -63,9 +57,19 @@ export default class WebServer {
             this.app.set('views', directories.frontend);                // ... set Frontend Directory
             this.app.set('twig options', {});                           // ... set Twig Options
         }
-        this.app.use('/test', this.router);
         this.app.set('view options', {layout: false});                  // Set View Options
         this.app.use(express.static(directories.frontend));             // Set Frontend Static Directory ( needed for "include files" like 'js', 'css', 'png' ...)
+
+        this.prefix = '';
+        if ( settings.webServer.prefix && settings.webServer.prefix !== '' ) {
+            this.prefix = settings.webServer.prefix;
+            this.router = new express.Router();
+            this.router.use(this.prefix, () => {});
+            this.app.use(this.prefix, express.static(directories.frontend));
+            this.app.use(this.prefix, this.router);
+            this.app.use(this.prefix, this.router);
+        }
+
         this.app.use(express.urlencoded({extended: false}));            // Set Url Encoding
         this.app.use(flash());                                          // Include Flash to set direct Messages on HTML Form
         this.app.use(session({                                          // Set WebServer Session
@@ -90,7 +94,7 @@ export default class WebServer {
      */
     checkAuthenticated_Backend(req, res, next) {
         if ( req.isAuthenticated()) { return next(); }
-        res.redirect('/backend/login');
+        res.redirect(TGSoft.webServer.prefix + '/backend/login');
     }
 
     /**
@@ -101,7 +105,7 @@ export default class WebServer {
      * @param {function} next Function that called on negative Authentication
      */
     checkNotAuthenticated_Backend(req, res, next) {
-        if ( req.isAuthenticated() ) { res.redirect('/backend'); }
+        if ( req.isAuthenticated() ) { res.redirect(TGSoft.webServer.prefix + '/backend'); }
         next();
     }
 
@@ -137,13 +141,13 @@ export default class WebServer {
             params.lstModuleRights = [];
             params.myModules = [];
             params.basicSite = TGSoft.settings.webServer.basicSite;
+            params.prefix = TGSoft.webServer.prefix;
             params.me = {
                 id: 0,
                 name: '',
                 role: '',
                 active: false,
             };
-
             this.toTwigOutput(req, res, filePath, fileName, params);
         }
     }

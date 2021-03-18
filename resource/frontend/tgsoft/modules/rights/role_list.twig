@@ -5,7 +5,7 @@
 {% block content %}
     {% if ( myModules.TGSoft_Roles.add == 1 ) %}
         {% if ( myModules.TGSoft_Account.add == 1 ) %}
-            <a href="/backend/roles/details/0">
+            <a href="{{prefix}}/backend/roles/details/0">
                 <button class="btnAdd default_style1" roleId="0">Neu anlegen</button>
             </a>
         {% endif %}

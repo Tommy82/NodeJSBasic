@@ -43,10 +43,10 @@
 
 {% block stylesheet %}
     {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="/tgsoft/modules/accounts/assets/accounts.css">
+    <link rel="stylesheet" type="text/css" href="{{prefix}}/tgsoft/modules/accounts/assets/accounts.css">
 {% endblock %}
 
 {% block javascript_intern %}
     {{ parent() }}
-    <script type="text/javascript" src="/tgsoft/modules/accounts/assets/account.js"></script>
+    <script type="text/javascript" src="{{prefix}}/tgsoft/modules/accounts/assets/account.js"></script>
 {% endblock %}

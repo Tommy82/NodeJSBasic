@@ -18,10 +18,10 @@
 
 {% block javascript_intern %}
     {{ parent() }}
-    <script type="text/javascript" src="/tgsoft/modules/main/assets/main.js"></script>
+    <script type="text/javascript" src="{{prefix}}/tgsoft/modules/main/assets/main.js"></script>
 {% endblock %}
 
 {% block stylesheet %}
     {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="/tgsoft/modules/main/assets/main.css">
+    <link rel="stylesheet" type="text/css" href="{{prefix}}/tgsoft/modules/main/assets/main.css">
 {% endblock %}

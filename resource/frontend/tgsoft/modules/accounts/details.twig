@@ -48,7 +48,7 @@
                     <td class="details_col1">&nbsp;</td>
                     <td class="details_col2"><button type="submit" class="default_style1">Speichern</button></td>
                     <td class="details_col3">
-                        <a href="/backend/users">
+                        <a href="{{prefix}}/backend/users">
                             <button type="button" class="default_style1">Abbrechen</button>
                         </a>
                     </td>
@@ -60,10 +60,10 @@
 
 {% block stylesheet %}
     {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="/tgsoft/modules/accounts/assets/details.css">
+    <link rel="stylesheet" type="text/css" href="{{prefix}}/tgsoft/modules/accounts/assets/details.css">
 {% endblock %}
 
 {% block javascript_intern %}
     {{ parent() }}
-    <script type="text/javascript" src="/tgsoft/modules/accounts/assets/details.js"></script>
+    <script type="text/javascript" src="{{prefix}}/tgsoft/modules/accounts/assets/details.js"></script>
 {% endblock %}
