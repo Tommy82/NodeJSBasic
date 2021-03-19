@@ -24,6 +24,10 @@ export const settings = {
         port: 3000,                                             // WebServer - Post
         sessionKey: 'mySecret@HashKey!Key_That!noBody%knows',   // Secure Session Key
         templateSystem: 'twig', // Only 'twig'                  // Template System [ only Twig ! ]
-        basicSite: '/tgsoft/basic/backend/basic.twig'           // Basic Template Site on Backend !
+        basicSite: '/tgsoft/basic/backend/basic.twig',          // Basic Template Site on Backend !
+        prefix: '/test',                                        // URL Prefix for ProxyPass | Attention: Also add in Frontend to Basic site (Parent Site of all!) (tgsoft/basic/backend/basic.twig) [{%set prefix = ''%}]
+    },
+    main: {
+        changelogFile: '/resource/readme/changelog_tgsoft.txt'  // ChangelogFile
     }
 }
